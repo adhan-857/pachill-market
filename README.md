@@ -9,5 +9,6 @@
 
 >> #### [ Membuat aplikasi dengan nama *main* pada proyek tersebut ]
 >> Untuk membuat sebuah aplikasi *main* pada proyek 'pachill-market' yang telah kita buat sebelumnya, kita dapat menjalankan perintah python manage.py startapp main untuk membuat sebuah aplikasi baru.
+<br>
 
 #### Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara *urls.py*, *views.py*, *models.py*, dan berkas *html*!
