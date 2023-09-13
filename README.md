@@ -1,6 +1,8 @@
 # Tugas 2: Implementasi *Model-View-Template* (MVT) pada Django
 ### Ramadhan Andika Putra (2206081976) - PBP A <br>
 
+*[ Link adaptable: https://pachill-market.adaptable.app/main/ ]*
+
 #### Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*!
 >> #### [ Membuat sebuah proyek Django baru ]
 >> Untuk membuat sebuah proyek Django baru, tentunya saya harus menyiapkan sebuah direktori baru terlebih dahulu. Direktori tersebut saya beri nama 'pachill-market' sesuai dengan nama aplikasi yang akan saya buat. Lalu, saya harus menyiapkan dan menginstal beberapa *depedencies* yang ditambahkan ke berkas *requierements.txt* agar aplikasi yang saya buat dapat berfungsi. Tak lupa, saya menggunakan *virtual environment* untuk membantu mengisolasi *package* serta *dependencies* dari aplikasi sehingga tidak bertabrakan dengan versi lain yang mungkin terdapat pada laptop saya.
