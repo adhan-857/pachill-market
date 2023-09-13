@@ -5,14 +5,14 @@
 >> #### [ Membuat sebuah proyek Django baru ]
 >> Untuk membuat sebuah proyek Django baru, tentunya saya harus menyiapkan sebuah direktori baru terlebih dahulu. Direktori tersebut saya beri nama 'pachill-market' sesuai dengan nama aplikasi yang akan saya buat. Lalu, saya harus menyiapkan dan menginstal beberapa *depedencies* yang ditambahkan ke berkas *requierements.txt* agar aplikasi yang saya buat dapat berfungsi. Tak lupa, saya menggunakan *virtual environment* untuk membantu mengisolasi *package* serta *dependencies* dari aplikasi sehingga tidak bertabrakan dengan versi lain yang mungkin terdapat pada laptop saya.
 >>
->> Setelah itu, saya melakukan konfigurasi proyek dengan mengizinkan akses dari semua host, yang akan memungkinkan aplikasi diakses secara luas. Lalu, saya mencoba menjalankan servernya dengan perintah python manage.py runserver dan memeriksa hasilnya di http://localhost:8000/. Yang terakhir, saya membuat repositori baru bernama 'pachill-market' dan menginisiasi direktori shopping_list sebagai repositori Git. Lalu, saya mengunggah direktori lokal saya ke repositori GitHub menggunakan add, commit, push.
+>> Setelah itu, saya melakukan konfigurasi proyek dengan mengizinkan akses dari semua host, yang akan memungkinkan aplikasi diakses secara luas. Lalu, saya mencoba menjalankan servernya dengan perintah *python manage.py runserver8 dan memeriksa hasilnya di *http://localhost:8000/*. Yang terakhir, saya membuat repositori baru bernama 'pachill-market' dan menginisiasi direktori *shopping_list* sebagai repositori Git. Lalu, saya mengunggah direktori lokal saya ke repositori GitHub menggunakan *add*, *commit*, *push*.
 
 >> #### [ Membuat aplikasi dengan nama *main* pada proyek tersebut ]
 >> Untuk membuat sebuah aplikasi *main* pada proyek 'pachill-market' yang telah kita buat sebelumnya, kita dapat menjalankan perintah *python manage.py startapp main* untuk membuat sebuah aplikasi baru.
 <br>
 <br>
 
-#### Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara *urls.py*, *views.py*, *models.py*, dan berkas *html*!
+#### Buatlah bagan yang berisi request *client* ke *web* aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara *urls.py*, *views.py*, *models.py*, dan berkas *html*!
 ![BaganTugas2](https://github.com/adhan-857/pachill-market/assets/119088782/3c6ddefd-aabb-40fe-9262-4a2d3a7fc3b6)
 Alur sebuah *request client* ke web aplikasi berbasis Django beserta responnya menurut bagan tersebut adalah sebagai berikut:
 * Pertama, *request* yang masuk ke dalam server Django akan diproses melalui *urls.py* untuk diteruskan ke *views.py* yang kita definisikan untuk memproses permintaan tersebut.
@@ -52,7 +52,7 @@ MVVM adalah singkatan dari *Model-View-ViewModel*. MVVM merupakan gabungan dari 
 
 Di bawah ini adalah perbedaan dari ketiganya:
 | Karakteristik    |     MVC                                         |      MVT                              |     MVVM                           |
-| ---------------- | ----------------------------------------------- | ------------------------------------- | ---------------------------------- |
+| ---------------- | ----------------                                | ----------------                      | ----------------                   |
 | Komponen         | Model, View, Controller                         | Model, View, Template                 | Model, View, ViewModel             |
 | Peran Controller | Mengontrol aliran data antara model dan *view*  | Diintegrasikan ke dalam *view*        | Jembatan antara *view* dan model   |
 | Kelebihan        | Mudah dipahami dan diimplementasikan            | Mudah digunakan untuk aplikasi kecil  | Mendukung dua arah *data binding*  |
