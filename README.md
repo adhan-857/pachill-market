@@ -28,3 +28,6 @@ Untuk menjawab apakah kita tetap dapat membuat aplikasi web berbasis Django tanp
 * Pengelolaan *library* dan *package* menjadi lebih sulit. Kita harus berhati-hati saat menginstal *library* atau *package* baru, karena *library* atau *package* tersebut mungkin akan mengganggu *library* dan *package* lain yang sudah kita instal.
 
 Secara umum, penggunaan virtual environment sangat dianjurkan untuk pengembangan aplikasi web berbasis Django. *Virtual environment* dapat membantu kita untuk menghindari masalah-masalah yang dapat terjadi jika kita tidak menggunakan *virtual environment*.
+
+#### Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya!
+Jawab
