@@ -8,9 +8,30 @@
 >> Untuk membuat sebuah proyek Django baru, tentunya saya harus menyiapkan sebuah direktori baru terlebih dahulu. Direktori tersebut saya beri nama 'pachill-market' sesuai dengan nama aplikasi yang akan saya buat. Lalu, saya harus menyiapkan dan menginstal beberapa *depedencies* yang ditambahkan ke berkas *requierements.txt* agar aplikasi yang saya buat dapat berfungsi. Tak lupa, saya menggunakan *virtual environment* untuk membantu mengisolasi *package* serta *dependencies* dari aplikasi sehingga tidak bertabrakan dengan versi lain yang mungkin terdapat pada laptop saya.
 >>
 >> Setelah itu, saya melakukan konfigurasi proyek dengan mengizinkan akses dari semua host, yang akan memungkinkan aplikasi diakses secara luas. Lalu, saya mencoba menjalankan servernya dengan perintah *python manage.py runserver8 dan memeriksa hasilnya di *http://localhost:8000/*. Yang terakhir, saya membuat repositori baru bernama 'pachill-market' dan menginisiasi direktori *shopping_list* sebagai repositori Git. Lalu, saya mengunggah direktori lokal saya ke repositori GitHub menggunakan *add*, *commit*, *push*.
+<br>
 
 >> #### [ Membuat aplikasi dengan nama *main* pada proyek tersebut ]
->> Untuk membuat sebuah aplikasi *main* pada proyek 'pachill-market' yang telah kita buat sebelumnya, kita dapat menjalankan perintah *python manage.py startapp main* untuk membuat sebuah aplikasi baru.
+>> Untuk membuat sebuah aplikasi *main* pada proyek 'pachill-market' yang telah kita buat sebelumnya, kita dapat menjalankan perintah *python manage.py startapp main* untuk membuat sebuah struktur baru untuk aplikasi yang akan kita buat. Lalu, saya mendaftarkan aplikasi *main* ke dalam proyek *pachill market* milik saya. Setelah itu, saya mengimplementasikan Template dan Model dasar untuk proyek aplikasi saya.
+<br>
+
+>> #### [ Melakukan routing pada proyek agar dapat menjalankan aplikasi main ]
+>> Untuk melakukan konfigurasi *outing* URL Aplikasi *main*, saya menambahkan rute URL dalam *urls.py* proyek untuk menghubungkannya ke tampilan *main* milik saya. Lalu, saya mengimpor fungsi *include* dari *django.urls* untuk mengimpor rute URL dari aplikasi main ke dalam berkas *urls.py* proyek. Setelah itu, saya menambahkan rute Path URL *'main/'* agar dapat diarahkan ke rute yang didefinisikan dalam berkas *urls.py* aplikasi *main*.
+<br>
+
+>> #### [ Membuat model pada aplikasi main dengan nama Item dan memiliki atribut wajib ]
+>> Saya mengubah berkas *models.py* yang terdapat di dalam direktori aplikasi main untuk mendefinisikan model baru sesuai dengan yang diminta pada tugas. Untuk detailnya, model yang saya buat memiliki atribut *name*, *date_added*, *price*, *amount*, dan *description*. Setiap atribut memiliki tipe data yang sesuai dengan yang diminta pada tugas seperti *CharField*, *IntegerField*, dan *TextField*.
+<br>
+
+>> #### [ Membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML ]
+>> Untuk menghubungkan *view* dengan *template*, saya mengimpor fungsi render dari modul django.shortcuts untuk me-render tampilan HTML dengan menggunakan data yang diberikan. Setelah itu, saya mengubah template *main.html* agar dapat menampilkan data yang telah diambil dari model (agar dapat menampilkan nilai dari variabel yang telah didefinisikan dalam context).
+<br>
+
+>> #### [ Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada views.py. ]
+>> Untuk membuat sebuah routing pada *urls.py* aplikasi main, saya membuat berkas *urls.py* di dalam direktori *main* ntuk mengatur rute URL yang terkait dengan aplikasi *main*. Nantinya, fungsi *show_main* dari modul *main.views* akan dijadikan sebagai tampilan yang akan ditampilkan ketika URL terkait diakses.
+<br>
+
+>> #### [ Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat ]
+>>  Untuk me-*deploy* ke Adaptable, saya memilih repositori proyek *pachill_market* sebagai basis aplikasi yang akan di-*deploy* dan *branch 'main'* sebagai *deployment branch*. Karena dalam membuat proyeknya sebagian besar menggunakan bahasa Python, maka saya memilih *Python App Template* sebagai *template deployment*. yang terakhir sebelum melakukan *deployment*, saya memasukkan nama aplikasi saya 'pachill market' agar daapt digunakan juga sebagai nama *domain* situs web aplikasi saya.
 <br>
 <br>
 
@@ -19,7 +40,7 @@
 Alur sebuah *request client* ke web aplikasi berbasis Django beserta responnya menurut bagan tersebut adalah sebagai berikut:
 * Pertama, *request* yang masuk ke dalam server Django akan diproses melalui *urls.py* untuk diteruskan ke *views.py* yang kita definisikan untuk memproses permintaan tersebut.
 * Apabila terdapat proses yang membutuhkan keterlibatan *database*, maka nantinya *views.py* akan memanggil *query* ke *models.py* dan *database* akan mengembalikan hasil dari *query* tersebut ke *views.py*.
-* Setelah permintaan telah selesai diproses, hasil proses tersebut akan dipetakan ke dalam HTML yang sudah didefinisikan pada *template.py* sebelum akhirnya HTML tersebut dikembalikan ke *client* sebagai respons.
+* Setelah permintaan telah selesai diproses, hasil proses tersebut akan dipetakan ke dalam HTML yang sudah didefinisikan pada *template* sebelum akhirnya HTML tersebut dikembalikan ke *client* sebagai respons.
 <br>
 <br>
 
@@ -58,4 +79,4 @@ Di bawah ini adalah perbedaan dari ketiganya:
 | Komponen         | Model, View, Controller                         | Model, View, Template                 | Model, View, ViewModel             |
 | Peran Controller | Mengontrol aliran data antara model dan *view*  | Diintegrasikan ke dalam *view*        | Jembatan antara *view* dan model   |
 | Kelebihan        | Mudah dipahami dan diimplementasikan            | Mudah digunakan untuk aplikasi kecil  | Mendukung dua arah *data binding*  |
-| Kekurangn        | Tidak cocok untuk aplikasi besar                | Tidak cocok untuk aplikasi kompleks   | Lebih kompleks daripada MVC        |
+| Kekurangan       | Tidak cocok untuk aplikasi besar                | Tidak cocok untuk aplikasi kompleks   | Lebih kompleks daripada MVC        |
