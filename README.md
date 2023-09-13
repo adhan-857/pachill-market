@@ -15,7 +15,7 @@
 <br>
 
 #### Buatlah bagan yang berisi request *client* ke *web* aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara *urls.py*, *views.py*, *models.py*, dan berkas *html*!
-![BaganTugas2](https://github.com/adhan-857/pachill-market/assets/119088782/3c6ddefd-aabb-40fe-9262-4a2d3a7fc3b6)
+![Bagan_Tugas2](https://github.com/adhan-857/pachill-market/assets/119088782/66ae4f1b-7bcc-4109-bf46-a8dbfbc3cf49)
 Alur sebuah *request client* ke web aplikasi berbasis Django beserta responnya menurut bagan tersebut adalah sebagai berikut:
 * Pertama, *request* yang masuk ke dalam server Django akan diproses melalui *urls.py* untuk diteruskan ke *views.py* yang kita definisikan untuk memproses permintaan tersebut.
 * Apabila terdapat proses yang membutuhkan keterlibatan *database*, maka nantinya *views.py* akan memanggil *query* ke *models.py* dan *database* akan mengembalikan hasil dari *query* tersebut ke *views.py*.
