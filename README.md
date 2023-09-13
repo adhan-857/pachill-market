@@ -51,8 +51,8 @@ MVVM adalah singkatan dari *Model-View-ViewModel*. MVVM merupakan gabungan dari 
 * *ViewModel*: Komponen ini di satu sisi adalah abstraksi dari *View*, lalu di sisi yang lain sebagai penyedia pembungkus data model untuk ditautkan. *ViewModel* terdiri dari Model yang diubah menjadi *View*, dan berisi perintah yang dapat digunakan oleh *View* untuk mempengaruhi Model.
 
 Di bawah ini adalah perbedaan dari ketiganya:
-| Karakteristik    |     MVC                                         |      MVT                              |     MVVM                           |
-| ---------------- | ----------------                                | ----------------                      | ----------------                   |
+| Karakteristik    |     MVC          |      MVT         |      MVVM        |
+| ---------------- | ---------------- | ---------------- | ---------------- |
 | Komponen         | Model, View, Controller                         | Model, View, Template                 | Model, View, ViewModel             |
 | Peran Controller | Mengontrol aliran data antara model dan *view*  | Diintegrasikan ke dalam *view*        | Jembatan antara *view* dan model   |
 | Kelebihan        | Mudah dipahami dan diimplementasikan            | Mudah digunakan untuk aplikasi kecil  | Mendukung dua arah *data binding*  |
