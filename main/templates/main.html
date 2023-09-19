@@ -1,72 +1,118 @@
-<h1>- Pachill Market Stock Manager -</h1>
-<p>
-    Platform pengelola stok supermarket idaman kamu :D
-</p>
+{% extends 'base.html' %}
 
-<h4>{{ kategori_1 }}: </h4>
-<table border="1", style="width:57%">
-    <tr> 
-       <td bgcolor="black";></td>
-       <th>Jumlah Stok</th>
-       <th>Harga Satuan</th>
-     </tr>
-     <tr>
-       <th>{{ barang1_kategori1 }}</th>
-       <td style="text-align: center;">{{ stok1_kategori1 }}</td>
-       <td style="text-align: center;">Rp{{ harga1_kategori1 }},00</td>
-     </tr>
-     <tr>
-        <th>{{ barang2_kategori1 }}</th>
-        <td style="text-align: center;">{{ stok2_kategori1 }}</td>
-        <td style="text-align: center;">Rp{{ harga2_kategori1 }},00</td>
+{% block content %}
+    <h1>[Pachill Market Stock Manager]</h1>
+    <p>
+        Platform pengelola stok supermarket idaman kamu :D
+    </p>
+
+    <h4>{{ kategori_1 }}: </h4>
+    <table border="1", style="width:57%">
+        <tr> 
+          <td bgcolor="black";></td>
+          <th>Jumlah Stok</th>
+          <th>Harga Satuan</th>
+        </tr>
+        <tr>
+          <th>{{ barang1_kategori1 }}</th>
+          <td style="text-align: center;">{{ stok1_kategori1 }}</td>
+          <td style="text-align: center;">Rp{{ harga1_kategori1 }},00</td>
+        </tr>
+        <tr>
+            <th>{{ barang2_kategori1 }}</th>
+            <td style="text-align: center;">{{ stok2_kategori1 }}</td>
+            <td style="text-align: center;">Rp{{ harga2_kategori1 }},00</td>
+          </tr>
+    </table>
+
+    <h4>
+        <br>
+        {{ kategori_2 }}: 
+    </h4>
+    <table border="1", style="width:57%">
+        <tr> 
+          <td bgcolor="black";></td>
+          <th>Jumlah Stok</th>
+          <th>Harga Satuan</th>
+        </tr>
+        <tr>
+          <th>{{ barang1_kategori2 }}</th>
+          <td style="text-align: center;">{{ stok1_kategori2 }}</td>
+          <td style="text-align: center;">Rp{{ harga1_kategori2 }},00</td>
+        </tr>
+        <tr>
+            <th>{{ barang2_kategori2 }}</th>
+            <td style="text-align: center;">{{ stok2_kategori2 }}</td>
+            <td style="text-align: center;">Rp{{ harga2_kategori2 }},00</td>
+          </tr>
+    </table>
+
+    <h4>
+        <br>
+        {{ kategori_3 }}: 
+    </h4>
+    <table border="1", style="width:57%">
+        <tr> 
+          <td bgcolor="black";></td>
+          <th>Jumlah Stok</th>
+          <th>Harga Satuan</th>
+        </tr>
+        <tr>
+          <th>{{ barang1_kategori3 }}</th>
+          <td style="text-align: center;">{{ stok1_kategori3 }}</td>
+          <td style="text-align: center;">Rp{{ harga1_kategori3 }},00</td>
+        </tr>
+        <tr>
+            <th>{{ barang2_kategori3 }}</th>
+            <td style="text-align: center;">{{ stok2_kategori3 }}</td>
+            <td style="text-align: center;">Rp{{ harga2_kategori3 }},00</td>
+          </tr>
+    </table>
+
+    <p>
+      <br>
+      <h2>- Transaction History -</h2>
+      <td>Total Transaksi yang Sudah Dilakukan: {{ products|length }}</td>
+    </p>
+    
+    <p>
+      <td>Total Barang yang Sudah Terjual: {{ jumlah_total }}</td>
+    </p>
+
+    <table border="1", style="width:72%">
+      <tr>
+          <th>Nama Pembeli</th>
+          <th>Nama Produk</th>
+          <th>Jumlah Produk</th>
+          <th>Review Pengalaman Berbelanja</th>
+          <th>Tanggal Pembelian</th>
       </tr>
-</table>
+  
+      {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+  
+      {% for product in products %}
+          <tr>
+              <td style="text-align: center;">{{product.name_1}}</td>
+              <td style="text-align: center;">{{product.name_2}}</td>
+              <td style="text-align: center;">{{product.price}}</td>
+              <td style="text-align: center;">{{product.description}}</td>
+              <td style="text-align: center;">{{product.date_added}}</td>
+          </tr>
+      {% endfor %}
+    </table>
+  
+  <br />
+  
+  <a href="{% url 'main:create_product' %}">
+      <button>
+          Catat Transaksi Baru
+      </button>
+  </a>
 
-<h4>
+  <p>
     <br>
-    {{ kategori_2 }}: 
-</h4>
-<table border="1", style="width:57%">
-    <tr> 
-       <td bgcolor="black";></td>
-       <th>Jumlah Stok</th>
-       <th>Harga Satuan</th>
-     </tr>
-     <tr>
-       <th>{{ barang1_kategori2 }}</th>
-       <td style="text-align: center;">{{ stok1_kategori2 }}</td>
-       <td style="text-align: center;">Rp{{ harga1_kategori2 }},00</td>
-     </tr>
-     <tr>
-        <th>{{ barang2_kategori2 }}</th>
-        <td style="text-align: center;">{{ stok2_kategori2 }}</td>
-        <td style="text-align: center;">Rp{{ harga2_kategori2 }},00</td>
-      </tr>
-</table>
-
-<h4>
     <br>
-    {{ kategori_3 }}: 
-</h4>
-<table border="1", style="width:57%">
-    <tr> 
-       <td bgcolor="black";></td>
-       <th>Jumlah Stok</th>
-       <th>Harga Satuan</th>
-     </tr>
-     <tr>
-       <th>{{ barang1_kategori3 }}</th>
-       <td style="text-align: center;">{{ stok1_kategori3 }}</td>
-       <td style="text-align: center;">Rp{{ harga1_kategori3 }},00</td>
-     </tr>
-     <tr>
-        <th>{{ barang2_kategori3 }}</th>
-        <td style="text-align: center;">{{ stok2_kategori3 }}</td>
-        <td style="text-align: center;">Rp{{ harga2_kategori3 }},00</td>
-      </tr>
-</table>
-
-<p>
     <br>
     <i>Last updated by: {{ nama_updater }}</i>
-</p>
+  </p>
+{% endblock content %}

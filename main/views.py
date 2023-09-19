@@ -1,7 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.http import HttpResponse
+from django.core import serializers
+from django.urls import reverse
+from main.forms import ProductForm
+from .models import Product
 
 # Create your views here.
 def show_main(request):
+    products = Product.objects.all()
+    jumlah_total = sum(product.price for product in products)
+
     context = {
         # Kategori 1
         'kategori_1': 'Makanan',
@@ -38,6 +47,41 @@ def show_main(request):
 
         # Nama yang membuat update terakhir
         'nama_updater': 'Ramadhan Andika Putra',
+
+        'jumlah_total': jumlah_total,
+        'products': products
     }
 
     return render(request, "main.html", context)
+
+def create_product(request):
+    if request.method == "POST":
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            # Set a default value for the 'amount' field
+            product = form.save(commit=False)
+            product.amount = 0  # Set the default value
+            product.save()
+            return redirect('main:show_main')
+
+    else:
+        form = ProductForm()
+
+    context = {'form': form}
+    return render(request, "create_product.html", context)
+
+def show_xml(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def show_xml_by_id(request, id):
+    data = Product.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json_by_id(request, id):
+    data = Product.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
