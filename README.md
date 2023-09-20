@@ -3,17 +3,21 @@
 
 #### Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*!
 >> #### [ Membuat input *form* untuk menambahkan objek model pada app sebelumnya. ]
->> Blablabla
+>> Pertama, saya membuat berkas baru pada direktori *main* dengan nama *forms.py* agar dapat menerima data baru produk yang akan dibeli. Saya menambahkan *fields = ["name_1", "name_2", "price", "description"]* sebagai *field* dari model *Product* yang digunakan untuk form. Saya menambahkan *field* baru bernama *name_2* karena *web app* saya memerlukan 2 buah *CharField* untuk
 >>
->> Kalo spasi blala
+>> Setelah itu, saya membuat *function create_product* pada berkas *views.py* yang berada pada folder *main* agar dapat menerima parameter *request* serta agar dapat menghasilkan formulir yang dapat menambahkan data produk secara otomatis ketika data di-*submit* dari form. Lalu, saya meng-*import* fungsi *create_product* tersebut ke dalam berkas *urls.py* pada folder *main* serta menambahkan *path url* ke dalam *urlpatterns* untuk mengakses fungsi yang telah di-*import* sebelumnya.
+>>
+>> Langkah selanjutnya, saya membuat berkas HTML baru dengan nama *create_product.html* pada direktori *main/templates* agar dapat menampilkan *fields form* yang sudah dibuat sebelumnya. Lalu yang terakhir, saya mengedit *main.html* agar dapat menampilkan data produk dalam bentuk *table* serta tombol "Catat Transaksi Baru" yang akan *redirect* ke halaman form.
 <br>
 
 >> #### [ Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML *by* ID, dan JSON *by* ID. ]
->> Blablabla
+>> Pertama, saya mengedit *function show_main* pada berkas *views.py* agar dapat mengambil seluruh object *Product* yang tersimpan pada *database*. Setelah itu, saya meng-*import HttpResponse* dan *Serializer* pada berkas *views.py* yang berada pada folder *main*. Lalu, saya membuat fungsi baru yang menerima parameter *request* dengan nama *show_xml* dan *show_json* dengan sebuah variabel di dalamnya yang menyimpan hasil *query* dari seluruh data yang ada pada *Product*.
+>>
+>> Setelah itu, saya membuat sebuah fungsi baru yang menerima parameter *request* dan *id* dengan nama *show_xml_by_id* dan *show_json_by_id* dengan sebuah variabel di dalamnya yang menyimpan hasil *query* dari data dengan id tertentu yang ada pada *Product*. Tak lupa, saya menambahkan *return function* berupa *HttpResponse* yang berisi parameter data hasil *query* yang sudah diserialisasi.
 <br>
 
 >> #### [ Membuat *routing* URL untuk masing-masing views yang telah ditambahkan pada poin 2 ]
->> Blablabla
+>> Saya meng-*import* seluruh fungsi *views* yang tadi telah saya buat ke dalam berkas *urls.py* yang ada pada folder *main* serta menambahkan *path url* ke dalam *urlpatterns* untuk mengakses fungsi yang sudah diimpor tadi.
 <br>
 <br>
 
