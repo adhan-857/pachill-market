@@ -1,4 +1,4 @@
-# Tugas 3: Implementasi *Form* dan *Data Delivery* pada Django
+# Tugas 3: Implementasi *Form* dan *Data Delivery* pada Django 
 ### Ramadhan Andika Putra (2206081976) - PBP A <br>
 
 #### Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*!
