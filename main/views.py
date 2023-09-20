@@ -46,7 +46,7 @@ def show_main(request):
         'harga2_kategori3': '5.500', # Harga
 
         # Nama yang membuat update terakhir
-        'nama_updater': 'Ramadhan Andika Putra',
+        'nama_updater': 'Ramadhan Andika Putra (2206081976) - PBP A',
 
         'jumlah_total': jumlah_total,
         'products': products

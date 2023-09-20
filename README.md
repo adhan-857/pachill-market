@@ -1,82 +1,136 @@
-# Tugas 2: Implementasi *Model-View-Template* (MVT) pada Django
+# Tugas 3: Implementasi *Form* dan *Data Delivery* pada Django 
 ### Ramadhan Andika Putra (2206081976) - PBP A <br>
 
-*[ Link adaptable: https://pachill-market.adaptable.app/main/ ]*
-
 #### Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*!
->> #### [ Membuat sebuah proyek Django baru ]
->> Untuk membuat sebuah proyek Django baru, tentunya saya harus menyiapkan sebuah direktori baru terlebih dahulu. Direktori tersebut saya beri nama 'pachill-market' sesuai dengan nama aplikasi yang akan saya buat. Lalu, saya harus menyiapkan dan menginstal beberapa *depedencies* yang ditambahkan ke berkas *requierements.txt* agar aplikasi yang saya buat dapat berfungsi. Tak lupa, saya menggunakan *virtual environment* untuk membantu mengisolasi *package* serta *dependencies* dari aplikasi sehingga tidak bertabrakan dengan versi lain yang mungkin terdapat pada laptop saya.
+>> #### [ Membuat input *form* untuk menambahkan objek model pada app sebelumnya. ]
+>> Pertama, saya membuat berkas baru pada direktori *main* dengan nama *forms.py* agar dapat menerima data baru produk yang akan dibeli. Saya menambahkan *fields = ["name_1", "name_2", "price", "description"]* sebagai *field* dari model *Product* yang digunakan untuk form. Saya menambahkan *field* baru bernama *name_2* karena *web app* saya memerlukan 2 buah *CharField* untuk
 >>
->> Setelah itu, saya melakukan konfigurasi proyek dengan mengizinkan akses dari semua host, yang akan memungkinkan aplikasi diakses secara luas. Lalu, saya mencoba menjalankan servernya dengan perintah *python manage.py runserver8 dan memeriksa hasilnya di *http://localhost:8000/*. Yang terakhir, saya membuat repositori baru bernama 'pachill-market' dan menginisiasi direktori *shopping_list* sebagai repositori Git. Lalu, saya mengunggah direktori lokal saya ke repositori GitHub menggunakan *add*, *commit*, *push*.
+>> Setelah itu, saya membuat *function create_product* pada berkas *views.py* yang berada pada folder *main* agar dapat menerima parameter *request* serta agar dapat menghasilkan formulir yang dapat menambahkan data produk secara otomatis ketika data di-*submit* dari form. Lalu, saya meng-*import* fungsi *create_product* tersebut ke dalam berkas *urls.py* pada folder *main* serta menambahkan *path url* ke dalam *urlpatterns* untuk mengakses fungsi yang telah di-*import* sebelumnya.
+>>
+>> Langkah selanjutnya, saya membuat berkas HTML baru dengan nama *create_product.html* pada direktori *main/templates* agar dapat menampilkan *fields form* yang sudah dibuat sebelumnya. Lalu yang terakhir, saya mengedit *main.html* agar dapat menampilkan data produk dalam bentuk *table* serta tombol "Catat Transaksi Baru" yang akan *redirect* ke halaman form.
 <br>
 
->> #### [ Membuat aplikasi dengan nama *main* pada proyek tersebut ]
->> Untuk membuat sebuah aplikasi *main* pada proyek 'pachill-market' yang telah kita buat sebelumnya, kita dapat menjalankan perintah *python manage.py startapp main* untuk membuat sebuah struktur baru untuk aplikasi yang akan kita buat. Lalu, saya mendaftarkan aplikasi *main* ke dalam proyek *pachill market* milik saya. Setelah itu, saya mengimplementasikan Template dan Model dasar untuk proyek aplikasi saya.
+>> #### [ Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML *by* ID, dan JSON *by* ID. ]
+>> Pertama, saya mengedit *function show_main* pada berkas *views.py* agar dapat mengambil seluruh object *Product* yang tersimpan pada *database*. Setelah itu, saya meng-*import HttpResponse* dan *Serializer* pada berkas *views.py* yang berada pada folder *main*. Lalu, saya membuat fungsi baru yang menerima parameter *request* dengan nama *show_xml* dan *show_json* dengan sebuah variabel di dalamnya yang menyimpan hasil *query* dari seluruh data yang ada pada *Product*.
+>>
+>> Setelah itu, saya membuat sebuah fungsi baru yang menerima parameter *request* dan *id* dengan nama *show_xml_by_id* dan *show_json_by_id* dengan sebuah variabel di dalamnya yang menyimpan hasil *query* dari data dengan id tertentu yang ada pada *Product*. Tak lupa, saya menambahkan *return function* berupa *HttpResponse* yang berisi parameter data hasil *query* yang sudah diserialisasi.
 <br>
 
->> #### [ Melakukan routing pada proyek agar dapat menjalankan aplikasi main ]
->> Untuk melakukan konfigurasi *outing* URL Aplikasi *main*, saya menambahkan rute URL dalam *urls.py* proyek untuk menghubungkannya ke tampilan *main* milik saya. Lalu, saya mengimpor fungsi *include* dari *django.urls* untuk mengimpor rute URL dari aplikasi main ke dalam berkas *urls.py* proyek. Setelah itu, saya menambahkan rute Path URL *'main/'* agar dapat diarahkan ke rute yang didefinisikan dalam berkas *urls.py* aplikasi *main*.
-<br>
-
->> #### [ Membuat model pada aplikasi main dengan nama Item dan memiliki atribut wajib ]
->> Saya mengubah berkas *models.py* yang terdapat di dalam direktori aplikasi main untuk mendefinisikan model baru sesuai dengan yang diminta pada tugas. Untuk detailnya, model yang saya buat memiliki atribut *name*, *date_added*, *price*, *amount*, dan *description*. Setiap atribut memiliki tipe data yang sesuai dengan yang diminta pada tugas seperti *CharField*, *IntegerField*, dan *TextField*.
-<br>
-
->> #### [ Membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML ]
->> Untuk menghubungkan *view* dengan *template*, saya mengimpor fungsi render dari modul django.shortcuts untuk me-render tampilan HTML dengan menggunakan data yang diberikan. Setelah itu, saya mengubah template *main.html* agar dapat menampilkan data yang telah diambil dari model (agar dapat menampilkan nilai dari variabel yang telah didefinisikan dalam context).
-<br>
-
->> #### [ Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada views.py. ]
->> Untuk membuat sebuah routing pada *urls.py* aplikasi main, saya membuat berkas *urls.py* di dalam direktori *main* ntuk mengatur rute URL yang terkait dengan aplikasi *main*. Nantinya, fungsi *show_main* dari modul *main.views* akan dijadikan sebagai tampilan yang akan ditampilkan ketika URL terkait diakses.
-<br>
-
->> #### [ Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat ]
->>  Untuk me-*deploy* ke Adaptable, saya memilih repositori proyek *pachill_market* sebagai basis aplikasi yang akan di-*deploy* dan *branch 'main'* sebagai *deployment branch*. Karena dalam membuat proyeknya sebagian besar menggunakan bahasa Python, maka saya memilih *Python App Template* sebagai *template deployment*. yang terakhir sebelum melakukan *deployment*, saya memasukkan nama aplikasi saya 'pachill market' agar daapt digunakan juga sebagai nama *domain* situs web aplikasi saya.
+>> #### [ Membuat *routing* URL untuk masing-masing views yang telah ditambahkan pada poin 2 ]
+>> Saya meng-*import* seluruh fungsi *views* yang tadi telah saya buat ke dalam berkas *urls.py* yang ada pada folder *main* serta menambahkan *path url* ke dalam *urlpatterns* untuk mengakses fungsi yang sudah diimpor tadi.
 <br>
 <br>
 
-#### Buatlah bagan yang berisi request *client* ke *web* aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara *urls.py*, *views.py*, *models.py*, dan berkas *html*!
-![Bagan_Tugas2](https://github.com/adhan-857/pachill-market/assets/119088782/66ae4f1b-7bcc-4109-bf46-a8dbfbc3cf49)
-Alur sebuah *request client* ke web aplikasi berbasis Django beserta responnya menurut bagan tersebut adalah sebagai berikut:
-* Pertama, *request* yang masuk ke dalam server Django akan diproses melalui *urls.py* untuk diteruskan ke *views.py* yang kita definisikan untuk memproses permintaan tersebut.
-* Apabila terdapat proses yang membutuhkan keterlibatan *database*, maka nantinya *views.py* akan memanggil *query* ke *models.py* dan *database* akan mengembalikan hasil dari *query* tersebut ke *views.py*.
-* Setelah permintaan telah selesai diproses, hasil proses tersebut akan dipetakan ke dalam HTML yang sudah didefinisikan pada *template* sebelum akhirnya HTML tersebut dikembalikan ke *client* sebagai respons.
+#### Apa perbedaan antara form POST dan form GET dalam Django?
+*Jawab:* <br>
+Perbedaan utama antara form POST dan form GET dalam Django adalah cara data ditransfer dari *client* ke server. Form POST mengirimkan data secara langsung dalam badan pesan tanpa menampilkan pada URL, sedangkan form GET mengirimkan data dalam URL *string*.
+
+***-Form POST-*** <br>
+Form POST digunakan untuk mengirimkan data ke server untuk diproses. Data yang dikirimkan dengan form POST tidak terlihat di URL *string*, sehingga lebih aman daripada form GET. Form POST juga dapat digunakan untuk mengirimkan data yang besar, seperti gambar atau file.
+
+***-Form GET-*** <br>
+Form GET digunakan untuk mengambil data dari server. Data yang dikirimkan dengan form GET terlihat di URL *string*, sehingga kurang aman daripada form POST. Form GET juga dapat digunakan untuk mengirimkan data yang kecil, seperti parameter pencarian.
 <br>
 <br>
 
-#### Jelaskan mengapa kita menggunakan *virtual environment*? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan *virtual environment*?
-*Virtual environment* adalah alat yang digunakan untuk membuat lingkungan Python virtual yang terisolasi. *Virtual environment* ini berguna untuk mengisolasi *package* serta *dependencies* dari aplikasi sehingga tidak bertabrakan dengan versi lain yang ada pada komputermu. Di sini, kita bisa membangun sebuah website Python, menginstall PIP dan berbagai *packages* di dalamnya tanpa bisa diakses oleh website Python lain.
+Intinya, secara garis besar perbedaan antara form POST dan form GET dalam Django  adalah sebagai berikut:
+| Fitur |     Form POST     |      Form GET      |
+| ---------------- | ---------------- | ---------------- |
+| Cara Pengiriman data | Badan pesan                               | URL *string*                 |
+| Kemananan            | Lebih aman                                | Kurang aman                  |
+| Ukuran data          | Dapat mengirimkan data besar              | Dapat mengirimkan data kecil |
+| Penggunaan           | Mengirimkan data ke server untuk diproses | Mengambil data dari server   |
 
-Untuk menjawab apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan *virtual environment*? *Jawabannya adalah ya*, kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan *virtual environment*. Namun, akan ada beberapa resiko yang harus kita waspadai, seperti:
-* Aplikasi mungkin tidak kompatibel satu sama lain. Jika kita mengembangkan beberapa aplikasi web dengan Django, dan aplikasi tersebut menggunakan versi Python atau *library* atau *package* yang berbeda, maka aplikasi tersebut mungkin tidak kompatibel satu sama lain.
-* Aplikasi mungkin mengalami masalah. Jika pustaka yang kita instal tidak kompatibel dengan *library* atau *package* lain, maka aplikasi kita mungkin akan mengalami masalah.
-* Pengelolaan *library* dan *package* menjadi lebih sulit. Kita harus berhati-hati saat menginstal *library* atau *package* baru, karena *library* atau *package* tersebut mungkin akan mengganggu *library* dan *package* lain yang sudah kita instal.
+Dengan perbedaan tersebut, tentunya ada saat dimana kita sebaiknya menggunakan Form POST atau Form GET. Untuk Form POST, biasanya digunakan jika kita ingin melakukan aktivitas berikut:
+*	Mengirimkan data sensitif, seperti kata sandi atau nomor kartu kredit
+*	Mengirimkan data yang besar, seperti gambar atau file
+*	Mengirimkan data yang tidak ingin terlihat di URL *string*
 
-Secara umum, penggunaan virtual environment sangat dianjurkan untuk pengembangan aplikasi web berbasis Django. *Virtual environment* dapat membantu kita untuk menghindari masalah-masalah yang dapat terjadi jika kita tidak menggunakan *virtual environment*.
+Sedangkan, untuk Form GET biasanya digunakan jika kita ingin melakukan aktivitas berikut:
+*	Mengambil data dari server
+*	Mengirimkan data yang kecil
+*	Mengirimkan data yang tidak sensitif
+<br>
+
+Berikut adalah beberapa contoh penggunaan form POST dan form GET dalam Django:
+*	***Form POST untuk login:*** Form login biasanya menggunakan form POST untuk mengirimkan data kata sandi dan nama pengguna ke server.
+*	***Form POST untuk mengunggah file:*** Form unggahan file biasanya menggunakan form POST untuk mengirimkan data file ke server.
+*	***Form GET untuk pencarian:*** Form pencarian biasanya menggunakan form GET untuk mengirimkan parameter pencarian ke server.
 <br>
 <br>
 
-#### Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya!
-Jawab
-MVC atau yang biasa disebut *Model-View-Controller* adalah suatu model yang seringkali digunakan oleh para pengembang *software*. Pola ini membagi aplikasi menjadi tiga komponen utama:
-* Model: Komponen ini bertanggung jawab untuk mengatur dan mengelola data dari aplikasi
-* *View*: Komponen ini bertanggung jawab untuk menangani logika presentasi dan menampilkan data ke pengguna.
-* *Controller8: Komponen ini bertanggung jawab untuk menerima input dari pengguna dan mengontrol aliran data antara model dan view.
+#### Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
+*Jawab:* <br>
+XML, JSON, dan HTML adalah format data yang umum digunakan untuk pengiriman data. Namun, ada beberapa perbedaan utama antara ketiga format tersebut, yaitu:
 
-MVT adalah singkatan dari *Model-View-Template*. MVT adalah sebuah konsep arsitektur yang digunakan dalam pengembangan *web* untuk memisahkan komponen-komponen utama dari sebuah aplikasi. Konsep ini memungkinkan pengembang *web* untuk mengorganisasi dan mengelola kode dengan lebih terstruktur.
-* Model: Komponen ini bertanggung jawab untuk mengatur dan mengelola data dari aplikasi
-* *View*: Komponen ini bertanggung jawab untuk menangani logika presentasi dan menampilkan data ke pengguna.
-* *Template*: Komponen ini bertanggung jawab untuk untuk mengatur tampilan atau antarmuka pengguna. Template memisahkan kode HTML dari logika aplikasi.
+***-XML-***
+*	XML adalah format data yang terstruktur. Data XML diformat dalam bentuk tag yang dapat diidentifikasi.
+*	XML bersifat deklaratif, artinya format datanya didefinisikan dalam dokumen XML itu sendiri.
+*	XML dapat digunakan untuk menggambarkan berbagai jenis data, termasuk data struktural, data hierarkis, dan data aritmatika.
 
-MVVM adalah singkatan dari *Model-View-ViewModel*. MVVM merupakan gabungan dari MVC dan MVP. Pola yang digunakan berdasarkan gabungan dari MVC dan MVP mencoba untuk lebih jelas dalam memisahkan pengembangan *UI* dari logika bisnis dan perilaku dalam aplikasi.
-* Model: Komponen ini bertanggung jawab untuk mengatur dan mengelola data dari aplikasi
-* *View*: Komponen ini bertanggung jawab untuk menangani logika presentasi dan menampilkan data ke pengguna.
-* *ViewModel*: Komponen ini di satu sisi adalah abstraksi dari *View*, lalu di sisi yang lain sebagai penyedia pembungkus data model untuk ditautkan. *ViewModel* terdiri dari Model yang diubah menjadi *View*, dan berisi perintah yang dapat digunakan oleh *View* untuk mempengaruhi Model.
+***-JSON-***
+*	JSON adalah format data yang tidak terstruktur. Data JSON diformat dalam bentuk objek, array, dan nilai primitif.
+*	JSON bersifat deskriptif, artinya format datanya didefinisikan di luar dokumen JSON tersebut.
+*	JSON sering digunakan untuk mengirimkan data sederhana, seperti data daftar atau data formulir.
 
-Di bawah ini adalah perbedaan dari ketiganya:
-| Karakteristik    |     MVC          |      MVT         |      MVVM        |
-| ---------------- | ---------------- | ---------------- | ---------------- |
-| Komponen         | Model, View, Controller                         | Model, View, Template                 | Model, View, ViewModel             |
-| Peran Controller | Mengontrol aliran data antara model dan *view*  | Diintegrasikan ke dalam *view*        | Jembatan antara *view* dan model   |
-| Kelebihan        | Mudah dipahami dan diimplementasikan            | Mudah digunakan untuk aplikasi kecil  | Mendukung dua arah *data binding*  |
-| Kekurangan       | Tidak cocok untuk aplikasi besar                | Tidak cocok untuk aplikasi kompleks   | Lebih kompleks daripada MVC        |
+***-HTML-***
+*	HTML adalah format data yang digunakan untuk membuat halaman web.
+*	HTML bersifat deklaratif, artinya format datanya didefinisikan dalam dokumen HTML itu sendiri.
+*	HTML dapat digunakan untuk menggambarkan berbagai elemen halaman web, seperti teks, gambar, tabel, dan tautan.
+<br>
+
+Secara keseluruhan, berikut adalah tabel rangkuman mengenai perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data:
+| Fitur |     XML     |      JSON     |      HTML     |
+| -------------- | -------------- | -------------- | -------------- |
+| Struktur       | Terstruktur                    | Tidak terstruktur         | Tidak terstruktur                |
+| Deklaratif     | Ya                             | Ya                        | Ya                               |
+| Kompatibilitas | Luas                           | Luas                      | Luas                             |
+| Penggunaan     | Umum untuk berbagai jenis data | Umum untuk data sederhana | Umum untuk pembuatan halaman web |
+<br>
+
+Kesimpulannya, XML, JSON, dan HTML adalah format data yang memiliki kelebihan dan kekurangan masing-masing. Pemilihan format data yang tepat tergantung pada kebutuhan spesifik aplikasi, yaitu:
+*	XML cocok untuk aplikasi yang membutuhkan pengiriman data yang terstruktur dan dapat digambarkan dengan jelas.
+*	JSON cocok untuk aplikasi yang membutuhkan pengiriman data yang sederhana dan mudah dibaca oleh manusia.
+*	HTML cocok untuk aplikasi yang membutuhkan pengiriman data untuk pembuatan halaman web
+<br>
+<br>
+
+#### Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
+*Jawab:* <br>
+Secara umum, JSON *(JavaScript Object Notation)* adalah format data yang ringan, mudah dibaca dan ditulis oleh manusia, dan mudah 'diurai' oleh komputer. JSON sering digunakan dalam pertukaran data antara aplikasi web modern karena beberapa alasan, yaitu:
+*	***Sederhana dan mudah dibaca oleh manusia:*** JSON menggunakan format teks yang sederhana dan mudah dibaca oleh manusia. Hal ini memudahkan *developer* untuk memahami data yang dikirimkan. JSON dapat dibaca seperti kode JavaScript, sehingga developer JavaScript dapat dengan mudah memahaminya.
+*	***Kompatibilitas yang luas:*** JSON didukung oleh berbagai bahasa pemrograman dan platform. Ini memudahkan pengembang untuk menggunakan JSON dalam aplikasi mereka. JSON didukung oleh semua bahasa pemrograman utama, termasuk JavaScript, Python, Java, C++, dan PHP. JSON juga didukung oleh berbagai platform, termasuk *web*, *mobile*, dan desktop.
+*	***Efisiensi:*** JSON adalah format data yang efisien. Ini memudahkan data untuk dikirimkan dan diproses. JSON menggunakan format teks, sehingga data dapat dikirimkan dengan cepat dan mudah. JSON juga dapat 'diurai' dengan cepat oleh komputer.
+<br>
+
+Berikut adalah beberapa contoh penggunaan JSON dalam pertukaran data antara aplikasi web modern:
+*	***Mengirimkan data dari aplikasi klien ke server:*** JSON sering digunakan untuk mengirimkan data dari aplikasi klien ke server, seperti data formulir atau data pencarian. Misalnya, saat pengguna mengirim formulir pendaftaran, data formulir tersebut dapat dikirimkan ke server dalam format JSON.
+*	***Mengirimkan data dari server ke aplikasi klien:*** JSON sering digunakan untuk mengirimkan data dari server ke aplikasi klien, seperti data produk atau data berita. Misalnya, saat pengguna mengakses halaman produk, data produk tersebut dapat dikirimkan dari server ke aplikasi klien dalam format JSON.
+*	***Menggunakan API RESTful:*** JSON sering digunakan dalam API RESTful untuk mewakili data yang dikirimkan dan diterima. API RESTful adalah jenis API yang menggunakan HTTP untuk berkomunikasi. JSON adalah format data yang ideal untuk API RESTful karena mudah dibaca dan ditulis oleh komputer.
+<br>
+<br>
+
+#### *Screenshot* dari hasil akses URL pada Postman
+*Jawab:*
+<br>
+
+-HTML- <br>
+<img width="960" alt="SS_HTML" src="https://github.com/adhan-857/pachill-market/assets/119088782/0a0b9e09-1d6d-468a-a178-1b7460c6a5d2">
+<br>
+
+-XML- <br>
+<img width="960" alt="SS_XML" src="https://github.com/adhan-857/pachill-market/assets/119088782/323381d9-091b-4f11-9765-28cfe52e8f88">
+
+<br>
+-JSON- <br>
+<img width="960" alt="SS_JSON" src="https://github.com/adhan-857/pachill-market/assets/119088782/adaf8150-9ca5-4957-a988-9beb7dca8a61">
+<br>
+<br>
+
+-XML *by ID*- <br>
+<img width="960" alt="SS_XMLbyID" src="https://github.com/adhan-857/pachill-market/assets/119088782/6f01f62b-85b4-4724-af9a-66557497dc86">
+<br>
+<br>
+
+-JSON *by ID*- <br>
+<img width="960" alt="SS_JSONbyID" src="https://github.com/adhan-857/pachill-market/assets/119088782/71d12c87-e43d-4053-90ea-68261955df01">
