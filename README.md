@@ -107,17 +107,26 @@ Berikut adalah beberapa contoh penggunaan JSON dalam pertukaran data antara apli
 <br>
 
 #### *Screenshot* dari hasil akses URL pada Postman
-HTML
--Gambar
+*Jawab:*
+<br>
 
-XML
--Gambar
+-HTML- <br>
+<img width="960" alt="SS_HTML" src="https://github.com/adhan-857/pachill-market/assets/119088782/0a0b9e09-1d6d-468a-a178-1b7460c6a5d2">
+<br>
 
-JSON
--Gambar
+-XML- <br>
+<img width="960" alt="SS_XML" src="https://github.com/adhan-857/pachill-market/assets/119088782/323381d9-091b-4f11-9765-28cfe52e8f88">
 
-XML *by ID*
--Gambar
+<br>
+-JSON- <br>
+<img width="960" alt="SS_JSON" src="https://github.com/adhan-857/pachill-market/assets/119088782/adaf8150-9ca5-4957-a988-9beb7dca8a61">
+<br>
+<br>
 
-JSON *by ID*
--Gambar
+-XML *by ID*- <br>
+<img width="960" alt="SS_XMLbyID" src="https://github.com/adhan-857/pachill-market/assets/119088782/6f01f62b-85b4-4724-af9a-66557497dc86">
+<br>
+<br>
+
+-JSON *by ID*- <br>
+<img width="960" alt="SS_JSONbyID" src="https://github.com/adhan-857/pachill-market/assets/119088782/71d12c87-e43d-4053-90ea-68261955df01">
