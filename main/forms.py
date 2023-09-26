@@ -5,10 +5,9 @@ from main.models import Product
 class ProductForm(ModelForm):
     class Meta:
         model = Product
-        fields = ["name_1", "name_2", "price", "description"]
+        fields = ["name_1", "amount", "description"]
         labels = {
-            "name_1": "Nama Pembeli",
-            "name_2": "Nama Produk",
-            "price": "Jumlah Produk",
+            "name_1": "Nama Produk",
+            "amount": "Jumlah Produk",
             "description": "Review Pengalaman Berbelanja",
         }

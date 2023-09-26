@@ -72,6 +72,10 @@
     <p>
       <br>
       <h2>- Transaction History -</h2>
+      <td>Nama akun: {{ name }}</td>
+    </p>
+
+    <p>
       <td>Total Transaksi yang Sudah Dilakukan: {{ products|length }}</td>
     </p>
     
@@ -79,13 +83,13 @@
       <td>Total Barang yang Sudah Terjual: {{ jumlah_total }}</td>
     </p>
 
-    <table border="1", style="width:72%">
+    <table border="1", style="width:75%">
       <tr>
-          <th>Nama Pembeli</th>
           <th>Nama Produk</th>
           <th>Jumlah Produk</th>
           <th>Review Pengalaman Berbelanja</th>
           <th>Tanggal Pembelian</th>
+          <th>Hapus Transaksi</th>
       </tr>
   
       {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
@@ -93,14 +97,21 @@
       {% for product in products %}
           <tr>
               <td style="text-align: center;">{{product.name_1}}</td>
-              <td style="text-align: center;">{{product.name_2}}</td>
-              <td style="text-align: center;">{{product.price}}</td>
+              <td style="text-align: center;">{{product.amount}}</td>
               <td style="text-align: center;">{{product.description}}</td>
               <td style="text-align: center;">{{product.date_added}}</td>
+              <td style="text-align: center;">
+                  <form method="post" action="{% url 'main:delete_product' product.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Hapus</button>
+                  </form>
+              </td>
           </tr>
       {% endfor %}
     </table>
   
+  <h5>Sesi terakhir login: {{ last_login }}</h5>
+
   <br />
   
   <a href="{% url 'main:create_product' %}">
@@ -108,6 +119,12 @@
           Catat Transaksi Baru
       </button>
   </a>
+
+  <a href="{% url 'main:logout' %}">
+    <button>
+        Logout
+    </button>
+</a>
 
   <p>
     <br>

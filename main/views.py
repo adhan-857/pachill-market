@@ -1,15 +1,21 @@
+import datetime
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseRedirect
 from django.http import HttpResponse
 from django.core import serializers
 from django.urls import reverse
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages  
 from main.forms import ProductForm
 from .models import Product
 
+@login_required(login_url='/login')
 # Create your views here.
 def show_main(request):
-    products = Product.objects.all()
-    jumlah_total = sum(product.price for product in products)
+    products = Product.objects.filter(user=request.user)
+    jumlah_total = sum(product.amount for product in products)
 
     context = {
         # Kategori 1
@@ -49,26 +55,69 @@ def show_main(request):
         'nama_updater': 'Ramadhan Andika Putra (2206081976) - PBP A',
 
         'jumlah_total': jumlah_total,
-        'products': products
+        'products': products,
+        'name': request.user.username,
+        'last_login': request.COOKIES['last_login'],
     }
 
     return render(request, "main.html", context)
 
 def create_product(request):
-    if request.method == "POST":
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            # Set a default value for the 'amount' field
-            product = form.save(commit=False)
-            product.amount = 0  # Set the default value
-            product.save()
-            return redirect('main:show_main')
+    form = ProductForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        product = form.save(commit=False)
+        product.user = request.user
+        product.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
 
     else:
         form = ProductForm()
 
     context = {'form': form}
     return render(request, "create_product.html", context)
+
+def delete_product(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+        product.delete()
+        return redirect('main:show_main')
+    except Product.DoesNotExist:
+        # Handle jika produk tidak ditemukan
+        pass
+
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Akun kamu sudah berhasil dibuat!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            response = HttpResponseRedirect(reverse("main:show_main")) 
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        else:
+            messages.info(request, 'Maaf, username atau password yang anda berikan salah. Mohon coba lagi! :D')
+    context = {}
+    return render(request, 'login.html', context)
+
+def logout_user(request):
+    logout(request)
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
 
 def show_xml(request):
     data = Product.objects.all()
