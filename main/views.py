@@ -86,6 +86,27 @@ def delete_product(request, product_id):
         # Handle jika produk tidak ditemukan
         pass
 
+def increase_product(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+        product.amount += 1
+        product.save()
+        return redirect('main:show_main')
+    except Product.DoesNotExist:
+        # Handle jika produk tidak ditemukan
+        pass
+
+def decrease_product(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+        if product.amount > 0:
+            product.amount -= 1
+            product.save()
+        return redirect('main:show_main')
+    except Product.DoesNotExist:
+        # Handle jika produk tidak ditemukan
+        pass
+
 def register(request):
     form = UserCreationForm()
 
