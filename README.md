@@ -1,121 +1,174 @@
-# Tugas 4: Implementasi Autentikasi, *Session*, dan *Cookies* pada Django
+# Tugas 5: Desain Web menggunakan HTML, CSS dan Framework CSS
 ### Ramadhan Andika Putra (2206081976) - PBP A <br>
 
 #### Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*!
->> #### [ Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar. ]
->> Pertama, saya membuat fungsi dengan nama *register* yang menerima parameter request pada *views.py* yang berada pada subdirektori *main*. Lalu, saya memanfaatkan UserCreationForm sebagai impor formulir bawaan yang memudahkan pembuatan formulir pendaftaran pengguna dalam aplikasi web. Dengan formulir ini, pengguna baru dapat mendaftar dengan mudah di situs web yang saya buat. Setelah itu, saya mengimpor fungsi *register* yang telah dibuat pada *urls.py* yang terdapat pada subdirektori *main*. Tak lupa. saya menambahkan *path url* ke dalam *urlpatterns* untuk mengakses fungsi yang sudah diimpor tadi.
+>> #### [ Kustomisasi halaman login, register, dan tambah inventori semenarik mungkin. ]
+>> Karena saya ingin menambahkan CSS menggunakan framework bootstrap, maka saya menambahkan Bootstrap CSS dan juga JS pada file base.html yang ada pada templates folder yang berada di root project.
 >>
->> Langkah selanjutnya, saya membuat fungsi dengan nama *login_user* yang menerima parameter request pada *views.py* yang berada pada subdirektori *main*. Lalu, saya mengimpor *function authenticate, login* untuk melakukan autentikasi dan *login* jika autentikasi berhasil. Setelah itu, saya mengimpor fungsi *login_user* yang telah dibuat pada *urls.py* yang terdapat pada subdirektori *main*. Tak lupa. saya menambahkan *path url* ke dalam *urlpatterns* untuk mengakses fungsi yang sudah diimpor tadi.
+>> Lalu, dengan memanfaatkan bootstrap saya menambahkan *navigation bar* pada halaman `main.html`. Navigation bar menampilkan nama app **'Pachill.Market'** serta tombol *'home'* (jika belum login, akan mengarahkan ke halaman login. jika sudah login, akan mengarahkan ke halaman main). Jika pengguna sudah login, maka pada navbar akan muncul username pengguna, waktu last login-nya, serta tombol untuk logout.
 >>
->> Yang terakhir, saya membuat fungsi dengan nama *logout_user* yang menerima parameter request pada *views.py* yang berada pada subdirektori *main*. Lalu, saya mengimpor *logout* pada bagian paling atas. Setelah itu, saya mengimpor fungsi *logout_user* yang telah dibuat pada *urls.py* yang terdapat pada subdirektori *main*. Tak lupa. saya menambahkan *path url* ke dalam *urlpatterns* untuk mengakses fungsi yang sudah diimpor tadi
+>> Navbar jika belum login:<br>
+>> <img width="959" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/52ac3695-ce75-4bb9-af5a-718953069e1e"><br>
+>> <img width="812" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/30f6dc94-7590-445e-aead-555c88a90540">
+>>
+>> Navbar jika sudah login:<br>
+>> <img width="949" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/24f64711-992b-4410-996b-f372d2de80df"><br>
+>> <img width="816" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/57a98fcc-29e9-429f-8b4c-ad05fb2ad0ff">
+>>
+>> <br>
+>> Lalu, saya membuat agar tampilan applikasi saya rata tengah dengan memanfaatkan `justify-content-center` dan `align-items-center`. Tak lupa, saya menambahkan class `card` dan menggunakan `bg-light` untuk mengatur warna latar belakang dari *card* tempat saya menaruh isi konten dari app saya.<br>
+>> <img width="769" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/6056f380-b940-4cf2-a16b-9fd3039aa97d"><br>
+>> <img width="960" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/271ee028-5939-46de-845d-bd48c587e99e">
+
 <br>
 
->> #### [ Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal. ]
->> #### [ Menghubungkan model Item dengan User. ]
->> Untuk saat ini semua akun akan terhubung ke data yang sama entah siapapun yang membuatnya. Sekarang kita akan membuat user menjadi bagian dari models agar setiap account memiliki datanya masing-masing. Langkah pertama, kita akan menambahkan user pada class Item pada models.py di subdirektori main. Lalu, kita akan mengubah function show_main dan create_product pada views.py di direktor main agar kita dapat menampilkan objek Product yang terasosiasikan dengan pengguna yang sedang login. Hal tersebut dilakukan dengan menyaring seluruh objek dengan hanya mengambil Product yang dimana field user terisi dengan objek User yang sama dengan pengguna yang sedang login.
->>
->> Selanjutnya, karena kita mengubah models.py maka kita perlu melakukan migrasi dengan menjalankan *python manage.py makemigrations* dan *python manage.py migrate* untuk mengaplikasikan migrasi yang dilakukan. Kita bisa mencobanya dengan membuat akun baru dan login dengan akun yang baru dibuat. Jika kita mengamati halaman utama, produk yang tadi telah dibuat dengan akun sebelumnya tidak akan ditampilkan di halaman pengguna akun yang baru saja kita buat.
-<br>
+>> #### [ Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan Card. ]
+>> Untuk melakukan kustomisasi halaman daftar inventori, saya menggunakan `card`. Jadi, untuk sebuah produk akan dibuatkan sebuah card yang menampilkan detail informasi dari produk tersebut. Banyaknya card akan mengikuti jumlah jenis produk yang dimasukkan.
+>> 
+>> <br>
+>> Tampilan kode:<br>
+>> <img width="273" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/2619e986-43f3-4288-a0db-447375682d16"><br>
+>> <br>
+>> Tampilan halaman daftar inventori:<br>
+>> <img width="960" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/1e33c84d-081e-4a26-a0a4-ce311cda4c4b"><br>
 
->> #### [ Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi. ]
->> Untuk mengimplementasikan checklist ini, saya memanfaatkan cookies yang ada pada Django. Pada views.py di direktori main, saya menambahkan import datetime. Setelah itu, saya mengubah fungsi login_user agar men-set cookies dengan key last_login dengan waktu saat ini. Lalu, saya juga menambahkan variable last_login yang datanya berasal dari COOKIES di dalam context pada fungsi show_main. Setelah itu, saya juga mengubah function logout_user agar dapat menghapus cookie last_login saat pengguna melakukan logout.
->>
->> Langkah terakhir, saya menambahkan potongan kode tambahkan berikut di antara tabel dan tombol logout untuk menampilkan data last login pada halaman utama aplikasi. <br>
->> *...*
->> *<h5>Sesi terakhir login: {{ last_login }}</h5>*
->> *...*
->>
->> Sekarang, jika kita mnelakukan login maka akan terlihat tampilan data last login kita pada halaman utama aplikasi.
 <br>
 <br>
 
-#### Apa itu Django *UserCreationForm*, dan jelaskan apa kelebihan dan kekurangannya?
+#### Jelaskan manfaat dari setiap *element selector* dan kapan waktu yang tepat untuk menggunakannya.
 *Jawab:* <br>
-Django UserCreationForm adalah sebuah form yang disediakan oleh kerangka kerja Django yang dapat digunakan untuk membuat pengguna baru di Django. Form ini sudah terintegrasi dengan sistem autentikasi Django, sehingga pengguna baru yang dibuat dengan form ini akan langsung dapat login ke aplikasi Django.
+Ada berbagai jenis selector, dan masing-masing memiliki kegunaan serta manfaat tertentu. Berikut ini adalah beberapa jenis selector dasar dan manfaat serta waktu yang tepat untuk menggunakannya:
 
-Kelebihan Django UserCreationForm:
-* **Mudah digunakan**. Django UserCreationForm sudah memiliki semua field yang dibutuhkan untuk membuat pengguna baru, sehingga pengguna tidak perlu membuat form sendiri.
-* **Terintegrasi dengan sistem autentikasi Django**. Pengguna baru yang dibuat dengan Django UserCreationForm akan langsung dapat login ke aplikasi Django.
-* **Dapat disesuaikan**. Django UserCreationForm dapat disesuaikan dengan kebutuhan aplikasi. Misalnya, pengguna dapat menambahkan field tambahan, seperti alamat email atau nomor telepon.
+<br>**Universal Selector ('*'):**
+* Manfaat: Memilih semua elemen di halaman.
+* Kapan menggunakannya: Saat kitaa ingin menerapkan gaya ke semua elemen di halaman. Misalnya, untuk mengatur margin dan padding menjadi 0 di semua elemen.
 
-Kekurangan Django UserCreationForm:
-* **Tidak dapat digunakan untuk membuat pengguna dengan peran khusus**. Django UserCreationForm hanya dapat digunakan untuk membuat pengguna dengan peran default, yaitu "user".
-* **Tidak dapat digunakan untuk membuat pengguna dengan data yang sudah ada**. Django UserCreationForm hanya dapat digunakan untuk membuat pengguna baru.
+<br>**Type Selector (atau Element Selector):**
+* Manfaat: Memilih elemen berdasarkan nama elemen (mis., `div`, `h1`, `p`).
+* Kapan menggunakannya: Saat kita ingin menerapkan gaya ke semua elemen dengan jenis tertentu. Misalnya, untuk mengatur semua paragraf `(p)` memiliki warna teks biru.
 
-Secara keseluruhan, UserCreationForm sangat berguna untuk skenario umum pembuatan pengguna dalam aplikasi Django, tetapi perlu dipertimbangkan dengan hati-hati jika kita memiliki kebutuhan yang sangat khusus atau kompleks dalam proses pendaftaran pengguna kita.
+<br>**Class Selector (`.classname`):**
+* Manfaat: Memilih elemen berdasarkan atribut kelas mereka.
+* Kapan menggunakannya: Saat kita ingin menerapkan gaya khusus ke sekelompok elemen tanpa mengacu pada jenis elemennya. Misalnya, jika kita memiliki beberapa elemen dengan kelas `highlight`, kita dapat menggunakan selector kelas untuk mengatur gaya bagi semua elemen tersebut.
+
+<br>**ID Selector (`#idname`):**
+* Manfaat: Memilih elemen berdasarkan atribut id mereka.
+* Kapan menggunakannya: Saat kita ingin memberikan gaya satu elemen spesifik yang memiliki ID tertentu. Ingat, ID harus unik dalam halaman, sehingga ID selector biasanya digunakan untuk elemen yang unik dalam desain.
+
+<br>**ID Selector (`#idname`):**
+* Manfaat: Memilih elemen berdasarkan atribut id mereka.
+ Kapan menggunakannya: Saat kita ingin memberikan gaya satu elemen spesifik yang memiliki ID tertentu. Ingat, ID harus unik dalam halaman, sehingga ID selector biasanya digunakan untuk elemen yang unik dalam desain.
+
+<br>**Descendant Selector (mis., `article p`):**
+* Manfaat: Memilih elemen berdasarkan hubungan keturunannya.
+* Kapan menggunakannya: Saat kita ingin menargetkan elemen yang berada di dalam elemen lain. Misalnya, untuk memberikan gaya semua paragraf yang berada di dalam elemen 'article'.
+
+<br>**Grouping Selector:**
+* Manfaat: Menggabungkan beberapa selector untuk menerapkan gaya yang sama ke beberapa elemen.
+* Kapan menggunakannya: Saat kita ingin menerapkan satu set gaya ke beberapa elemen berbeda. Misalnya, `h1, h2, h3 { font-family: Arial; }`.
 <br>
 <br>
 
-#### Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+#### Jelaskan HTML5 Tag yang kamu ketahui.
 *Jawab:* <br>
-Authentication dan authorization adalah dua konsep yang berbeda dalam keamanan komputer. Authentication adalah proses untuk memverifikasi identitas pengguna, sedangkan authorization adalah proses untuk menentukan apakah pengguna memiliki izin untuk mengakses sumber daya tertentu. *(Ibarat sebuah rumah, authentication adalah proses yang memverifikasi bahwa kita adalah pemilik rumah. Authorization adalah proses yang menentukan apakah kita memiliki izin untuk memasuki rumah tersebut.)*
- 
-Untuk lebih detailnya, authentication adalah proses untuk memverifikasi identitas pengguna. Hal ini dilakukan untuk memastikan bahwa pengguna yang mencoba mengakses sistem adalah pengguna yang sah. Authentication dapat dilakukan dengan berbagai metode, seperti menggunakan nama pengguna dan kata sandi, menggunakan token keamanan, atau menggunakan biometrik.
- 
-Sedangkan, authorization adalah proses untuk menentukan apakah pengguna memiliki izin untuk mengakses sumber daya tertentu. Hal ini dilakukan untuk memastikan bahwa pengguna hanya dapat mengakses sumber daya yang mereka berhak akses. Authorization dapat dilakukan dengan berbagai metode, seperti menggunakan peran pengguna, menggunakan kebijakan akses, atau menggunakan kontrol akses berbasis objek.
- 
-Keduanya memiliki beberapa perbedaan, yaitu: <br>
-***Authentication***
-* Memverfikasi siapa pengguna sebenarnya
-* Bekerja menggunakan kata sandi, OTP, informasi biometrik, dan informasi lain yang diberikan atau dimasukkan oleh pengguna
-* Tahap pertama dalam proses pemeriksaan keamanan
-* Terlihat dan sebagian dapat diubah oleh pengguna
- 
-***Authorization***
-* Menentukan sumber daya apa yang dapat diakses pengguna
-* Bekerja berdasarkan peraturan yang telah ditetapkan oleh developer atau organisasi pemilik aplikasi
-* Selalu dijalankan setelah proses authentication selesai
-* Tidak terlihat dan tidak dapat diubah oleh pengguna
+HTML5 Tag (atau elemen HTML5) adalah blok bangunan dasar dari halaman web HTML5. Tag digunakan untuk mendefinisikan struktur dan konten halaman web. Misalnya, tag `<p>` digunakan untuk mendefinisikan paragraf, tag `<img>` digunakan untuk mendefinisikan gambar, dan tag `<a>` digunakan untuk mendefinisikan hyperlink.
 
-Autentikasi dan otorisasi sangat penting dalam keamanan aplikasi web karena autentikasi membantu memastikan bahwa hanya pengguna yang sah yang dapat mengakses aplikasi, sedangkan otorisasi membantu memastikan bahwa pengguna hanya dapat mengakses sumber daya yang mereka miliki izin untuk mengakses.
+HTML5 memiliki lebih dari 100 tag yang berbeda, tetapi beberapa tag yang paling umum digunakan termasuk:
+* `<head>` dan `<body>`: Tag ini mendefinisikan bagian kepala dan badan dari halaman web.
+* `<title>`: Tag ini mendefinisikan judul halaman web.
+* `<h1>`, `<h2>`, `<h3>`, dst.: Tag ini mendefinisikan heading (judul) dari berbagai tingkat.
+* `<p>`: Tag ini mendefinisikan paragraf.
+* `<img>`: Tag ini mendefinisikan gambar.
+* `<a>`: Tag ini mendefinisikan hyperlink.
+* `<ul>` dan `<ol>`: Tag ini mendefinisikan daftar tidak berurut dan daftar berurut.
+* `<table>`: Tag ini mendefinisikan tabel.
+* `<div>`: Tag ini mendefinisikan divisi, yang merupakan blok konten generik.
 
-Tanpa autentikasi, siapa pun dapat mengakses aplikasi kita, bahkan jika mereka tidak memiliki izin untuk melakukannya. Hal ini dapat menyebabkan pencurian data, penyalahgunaan sistem, dan kerusakan lainnya. Tanpa otorisasi, pengguna dapat mengakses semua sumber daya dalam aplikasi Anda, bahkan jika mereka tidak memiliki izin untuk melakukannya. Hal ini dapat menyebabkan kebocoran data, penyalahgunaan sistem, dan kerusakan lainnya.
+HTML5 juga memiliki sejumlah tag baru yang tidak tersedia di versi HTML sebelumnya. Tag-tag baru ini menambahkan fungsionalitas baru ke halaman web, seperti:
+* `<audio>` dan `<video>`: Tag ini digunakan untuk mendefinisikan audio dan video.
+* `<canvas>`: Tag ini digunakan untuk menggambar grafik dan animasi.
+* `<svg>`: Tag ini digunakan untuk mendefinisikan gambar vektor.
+*`<section>`: Tag ini digunakan untuk mendefinisikan bagian dari halaman web.
+* `<article>`: Tag ini digunakan untuk mendefinisikan artikel mandiri.
 
-Oleh karena itu, penting untuk menerapkan autentikasi dan otorisasi yang tepat dalam aplikasi web kita.
+Tag HTML5 ditulis dalam bentuk pasangan tag, dengan tag pembuka (`<tag>`) dan tag penutup (`</tag>`). Misalnya, untuk mendefinisikan paragraf, kita akan menggunakan tag `<p>` sebagai tag pembuka dan tag `</p>` sebagai tag penutup. Semua konten paragraf akan ditulis di antara tag pembuka dan tag penutup.
 <br>
 <br>
 
-#### Apa itu *cookies* dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+#### Jelaskan perbedaan antara margin dan padding.
 *Jawab:* <br>
-*Cookies* adalah sejumlah kecil data yang disimpan di dalam browser web pengguna saat mereka mengunjungi sebuah situs web. *Cookies* digunakan dalam konteks aplikasi web untuk berbagai tujuan, termasuk mengidentifikasi pengguna, melacak preferensi pengguna, menyimpan data sesi, dan lainnya. Dalam konteks Django, *cookies* dapat digunakan untuk mengelola data sesi pengguna.
 
-Dalam konteks aplikasi web, *cookie* sering digunakan untuk mengelola data sesi pengguna. Sesi pengguna adalah jangka waktu di mana pengguna berinteraksi dengan aplikasi web. Selama sesi, aplikasi web dapat menyimpan informasi tentang pengguna, seperti:
-* Identitas pengguna
-* Informasi tentang halaman yang telah dikunjungi pengguna
-* Informasi tentang tindakan yang telah dilakukan pengguna
+Margin dan padding adalah dua properti CSS yang digunakan untuk mengatur jarak antara elemen HTML. Margin adalah jarak antara elemen dan elemen lain di sekitarnya, sedangkan padding adalah jarak antara elemen dan kontennya.
 
-Django menggunakan cookie untuk mengelola data sesi pengguna dengan cara berikut:
-* Django membuat *cookie* sesi saat pengguna masuk ke aplikasi web.
-* *Cookie* sesi berisi informasi tentang identitas pengguna, seperti ID pengguna dan nama pengguna.
-* Django menggunakan *cookie* sesi untuk memverifikasi identitas pengguna saat mereka melakukan permintaan ke aplikasi web.
+Perbedaan antara margin dan padding:
+| Fitur    |     Margin       |      Padding     |
+| -------- | ---------------- | ---------------- |
+| Lokasi                        | Di luar elemen                                | Di dalam elemen                             |
+| Pengaruh terhadap elemen lain | Mengatur jarak antara elemen dan elemen lain  | Mengatur jarak antara elemen dan kontennya  |
+| Nilai                         | Bisa positif, negatif, atau auto              | Bisa positif atau negatif                   |
+| Nilai default                 | 0px                                           | 0px                                         |
 
-Django juga menggunakan *cookie* untuk menyimpan preferensi pengguna. Misalnya, Django dapat menggunakan *cookie* untuk menyimpan preferensi bahasa pengguna atau preferensi tampilan.
+Kapan menggunakannya:
+* Margin digunakan untuk mengatur jarak antara elemen dan elemen lain. Misalnya, kita dapat menggunakan margin untuk membuat elemen-elemen di halaman web saling berjauhan.
+* Padding digunakan untuk mengatur jarak antara elemen dan kontennya. Misalnya, kita dapat menggunakan padding untuk membuat elemen tampak lebih tebal atau untuk menambahkan ruang kosong di sekitar konten.
+<br>
+
+Berikut adalah beberapa contoh penggunaan margin dan padding:<br>
+***Margin:***
+* Untuk membuat elemen-elemen di halaman web saling berjauhan
+* Untuk membuat elemen tampak lebih besar atau lebih kecil
+* Untuk mengatur tata letak halaman web
+
+***Padding:***
+* Untuk membuat elemen tampak lebih tebal atau lebih besar
+* Untuk menambahkan ruang kosong di sekitar konten
+* Untuk membuat elemen tampak lebih menarik
 <br>
 <br>
 
-#### Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+#### Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
 *Jawab:* <br>
-Penggunaan cookies tidak aman secara default dalam pengembangan web. Cookie dapat menjadi kerentanan keamanan jika tidak digunakan dengan benar.
+Tailwind dan Bootstrap adalah dua framework CSS yang populer untuk membangun tampilan web. Keduanya memiliki kelebihan dan kekurangannya masing-masing, sehingga penting untuk memilih framework yang tepat untuk kebutuhan kita.
 
-Berikut adalah beberapa risiko potensial yang harus diwaspadai saat menggunakan cookies:
-* **Risiko Keamanan Cookie**: Jika cookies digunakan untuk menyimpan data sensitif seperti token otentikasi atau informasi keuangan, mereka dapat menjadi target serangan peretas. Oleh karena itu, penting untuk mengenkripsi atau melindungi cookies yang berisi data sensitif, seperti dengan menggunakan HTTPS.
-* **Cross-Site Scripting (XSS)**: Jika aplikasi Anda rentan terhadap serangan XSS, peretas dapat mencoba mencuri cookies pengguna. Mereka dapat menginjeksi kode berbahaya yang mencuri cookies atau mengirimkan cookies ke situs jahat. Penggunaan tipe cookie yang aman (secure cookie flag) dan penghindaran dari XSS adalah penting.
-* **Cross-Site Request Forgery (CSRF)**: Serangan CSRF dapat memanfaatkan cookies untuk mengirim permintaan palsu dari browser pengguna yang terotentikasi. Ini dapat menyebabkan perubahan tidak diinginkan dalam status pengguna. Perlindungan CSRF seperti penggunaan token CSRF harus diterapkan.
-* **Keamanan Identitas**: Cookies yang digunakan untuk autentikasi atau sesi pengguna harus diatur dengan benar untuk menghindari serangan peretasan otentikasi, seperti serangan brute force pada kata sandi. Kebijakan keamanan, seperti membatasi jumlah percobaan login, harus diterapkan.
-* **Kebocoran Informasi**: Cookies bisa saja mengandung informasi yang seharusnya tidak terlihat oleh pengguna atau bahkan oleh aplikasi lain pada domain yang sama. Menerapkan aturan kebijakan SameSite pada cookies adalah penting untuk mengontrol perilaku mereka.
-* **Privasi Pengguna**: Pengguna memiliki hak privasi, dan penyimpanan cookies yang berlebihan atau pelacakan yang tidak diinginkan dapat melanggar privasi pengguna. Penting untuk mengikuti praktik-praktik terbaik dalam hal privasi dan peraturan yang berlaku seperti GDPR.
+Perbedaan antara Tailwind dan Bootstrap:
+| Fitur    |     Tailwind       |      Bootstrap     |
+| -------- | ------------------ | ------------------ |
+| Pendekatan    |	Utility-first |	Component-based    |
+| Ukuran file   |	Lebih kecil   |	Lebih besar        |
+| Fleksibilitas |	Lebih tinggi  |	Lebih rendah       |
+| Responsivitas |	Built-in      |	Built-in           |
+| Dokumentasi	  | Lengkap       |	Lengkap            |
+| Komunitas     |	Aktif         |	Aktif              |
 
-Untuk mengurangi risiko keamanan saat menggunakan cookies, Anda dapat menerapkan langkah-langkah berikut:
-* **Enkripsi cookie**: Enkripsi cookie akan membuat data yang disimpan dalam cookie tidak dapat dibaca oleh orang lain.
-* **Validasi cookie**: Validasi cookie akan membantu memastikan bahwa cookie yang diterima dari browser pengguna adalah cookie yang valid.
-* **Penggunaan cookie sesi**: Cookie sesi hanya akan disimpan di browser pengguna selama sesi aktif. Cookie sesi akan dihapus saat sesi berakhir.
-* **Penggunaan cookie dengan hati-hati**: Hanya simpan informasi yang diperlukan dalam cookie.
+***Tailwind***
+* Pendekatan: Tailwind menggunakan pendekatan utility-first, yang berarti kita menggunakan kelas CSS yang sudah jadi untuk mengatur tampilan elemen.
+* Ukuran file: Tailwind memiliki ukuran file yang lebih kecil daripada Bootstrap, sehingga lebih hemat bandwidth.
+* Fleksibilitas: Tailwind menawarkan fleksibilitas yang lebih tinggi daripada Bootstrap, karena kita bisa menyesuaikan tampilan elemen sesuai kebutuhan.
+* Responsivitas: Tailwind memiliki responsivitas yang built-in, sehingga kita tidak perlu mengaturnya secara manual.
+* Dokumentasi: Tailwind memiliki dokumentasi yang lengkap dan mudah dipahami.
+* Komunitas: Tailwind memiliki komunitas yang aktif dan membantu.
 
-Berikut adalah beberapa tips tambahan untuk meningkatkan keamanan cookie:
-* **Gunakan cookie dengan protokol HTTPS**. HTTPS akan mengenkripsi komunikasi antara browser pengguna dan server web.
-* **Setel masa berlaku cookie dengan bijak**. Masa berlaku cookie yang lebih pendek akan mengurangi risiko cookie yang dicuri.
-* **Gunakan cookie dengan domain yang tepat**. Hanya izinkan cookie dari domain yang Anda percayai untuk mengakses data dalam cookie.
+***Bootstrap***
+* Pendekatan: Bootstrap menggunakan pendekatan component-based, yang berarti kita menggunakan komponen yang sudah jadi untuk membangun tampilan halaman web.
+* Ukuran file: Bootstrap memiliki ukuran file yang lebih besar daripada Tailwind.
+* Fleksibilitas: Bootstrap menawarkan fleksibilitas yang lebih rendah daripada Tailwind, karena kita harus menyesuaikan komponen yang sudah jadi.
+* Responsivitas: Bootstrap memiliki responsivitas yang built-in, sehingga kita tidak perlu mengaturnya secara manual.
+* Dokumentasi: Bootstrap memiliki dokumentasi yang lengkap dan mudah dipahami.
+* Komunitas: Bootstrap memiliki komunitas yang aktif dan membantu.
 
-Dengan mengikuti langkah-langkah tersebut, dapat membantu kita untuk mengurangi risiko keamanan saat menggunakan cookies dalam pengembangan web.
 <br>
+Kapan sebaiknya menggunakan Bootstrap daripada Tailwind, dan sebaliknya? <br>
+
+***Bootstrap:***
+* Saat kita membutuhkan framework CSS yang siap pakai dengan banyak komponen yang sudah jadi.
+* Saat kita membutuhkan framework CSS yang responsif.
+* Saat kita membutuhkan framework CSS dengan komunitas yang aktif.
+
+***Tailwind:***
+* Saat kita membutuhkan framework CSS yang fleksibel dan bisa disesuaikan dengan kebutuhan.
+* Saat kita membutuhkan framework CSS yang ukuran filenya kecil.
+* Saat kita membutuhkan framework CSS yang baru dan up-to-date.
+
+<br>
+Secara umum, Bootstrap cocok untuk proyek yang membutuhkan tampilan web yang standar dan siap pakai, sedangkan Tailwind cocok untuk proyek yang membutuhkan tampilan web yang fleksibel dan bisa disesuaikan dengan kebutuhan.
 <br>
