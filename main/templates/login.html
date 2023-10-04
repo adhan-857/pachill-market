@@ -6,40 +6,96 @@
 
 {% block content %}
 
-<div class = "login">
+<link href="https://fonts.googleapis.com/css2?family=Uni+Sans:wght@400;700&display=swap" rel="stylesheet">
 
-    <h1>Login</h1>
+<style>
+    /* Mengubah font menjadi "Uni Sans" */
+    .navbar, .navbar-nav .nav-link {
+        font-family: 'Uni Sans', sans-serif;
+    }
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
+    /* Memperbesar ukuran teks dari "Pachill Market" */
+    .navbar-brand {
+        font-size: 32px;
+        font-family: 'Uni Sans Heavy Italic CAPS', sans-serif;
+        font-weight: 700;
+        font-style: italic;
+    }
 
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
+    .text-blue {
+    color: rgb(0, 94, 255);
+    }
 
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Apakah kamu belum mempunyai akun? <a href="{% url 'main:register' %}">Segera daftar sekarang!</a>
+    body {
+    background-color: rgb(232, 237, 255);
+    }
 
+    /* Memberikan margin atas pada container-fluid */
+    #content-container {
+        margin-top: 20px; /* Sesuaikan dengan margin yang Anda inginkan */
+    }
+
+    /* Menghapus margin atas pada navbar */
+    .navbar {
+        margin-top: 0;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
+    <div class="container-fluid">
+    <a class="navbar-brand mb-0 h1" href="#">
+        <span class="text-black">Pachill</span><span class="text-blue">.Market</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="{% url 'main:login' %}">[Home]</a>
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</nav>
+
+<div class="container-fluid h-100" id="content-container"> <!-- Menggunakan container-fluid dan h-100 untuk fullscreen -->
+    <div class="row h-100 justify-content-center align-items-center"> <!-- Menggunakan row dan justify-content-center align-items-center untuk rata tengah -->
+        <div class="col-md-4"> <!-- Menggunakan col-md-4 untuk lebar konten yang baik -->
+            <div class="card bg-light p-4"> <!-- Menambahkan kelas card, bg-light untuk latar belakang cerah, dan p-4 untuk padding -->
+                <h1 class="text-center mb-4">Login</h1>
+
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username:</label>
+                        <input type="text" name="username" id="username" class="form-control" placeholder="Username">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                    </div>
+
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="submit">Login</button>
+                    </div>
+                </form>
+
+                {% if messages %}
+                    <div class="mt-3">
+                        <ul>
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}     
+                
+                <p class="mt-3 text-center">Apakah kamu belum mempunyai akun?</br> <a href="{% url 'main:register' %}">Segera daftar sekarang!</a></p>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}

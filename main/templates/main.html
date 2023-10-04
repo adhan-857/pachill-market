@@ -1,148 +1,172 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>[Pachill Market Stock Manager]</h1>
-    <p>
-        Platform pengelola stok supermarket idaman kamu :D
-    </p>
+<link href="https://fonts.googleapis.com/css2?family=Uni+Sans:wght@400;700&display=swap" rel="stylesheet">
 
-    <h4>{{ kategori_1 }}: </h4>
-    <table border="1", style="width:57%">
-        <tr> 
-          <td bgcolor="black";></td>
-          <th>Jumlah Stok</th>
-          <th>Harga Satuan</th>
-        </tr>
-        <tr>
-          <th>{{ barang1_kategori1 }}</th>
-          <td style="text-align: center;">{{ stok1_kategori1 }}</td>
-          <td style="text-align: center;">Rp{{ harga1_kategori1 }},00</td>
-        </tr>
-        <tr>
-            <th>{{ barang2_kategori1 }}</th>
-            <td style="text-align: center;">{{ stok2_kategori1 }}</td>
-            <td style="text-align: center;">Rp{{ harga2_kategori1 }},00</td>
-          </tr>
-    </table>
+<style>
+    /* Mengubah font menjadi "Uni Sans" */
+    .navbar, .navbar-nav .nav-link {
+        font-family: 'Uni Sans', sans-serif;
+    }
 
-    <h4>
-        <br>
-        {{ kategori_2 }}: 
-    </h4>
-    <table border="1", style="width:57%">
-        <tr> 
-          <td bgcolor="black";></td>
-          <th>Jumlah Stok</th>
-          <th>Harga Satuan</th>
-        </tr>
-        <tr>
-          <th>{{ barang1_kategori2 }}</th>
-          <td style="text-align: center;">{{ stok1_kategori2 }}</td>
-          <td style="text-align: center;">Rp{{ harga1_kategori2 }},00</td>
-        </tr>
-        <tr>
-            <th>{{ barang2_kategori2 }}</th>
-            <td style="text-align: center;">{{ stok2_kategori2 }}</td>
-            <td style="text-align: center;">Rp{{ harga2_kategori2 }},00</td>
-          </tr>
-    </table>
+    /* Memperbesar ukuran teks dari "Pachill Market" */
+    .navbar-brand {
+        font-size: 32px;
+        font-family: 'Uni Sans Heavy Italic CAPS', sans-serif;
+        font-weight: 700;
+        font-style: italic;
+    }
 
-    <h4>
-        <br>
-        {{ kategori_3 }}: 
-    </h4>
-    <table border="1", style="width:57%">
-        <tr> 
-          <td bgcolor="black";></td>
-          <th>Jumlah Stok</th>
-          <th>Harga Satuan</th>
-        </tr>
-        <tr>
-          <th>{{ barang1_kategori3 }}</th>
-          <td style="text-align: center;">{{ stok1_kategori3 }}</td>
-          <td style="text-align: center;">Rp{{ harga1_kategori3 }},00</td>
-        </tr>
-        <tr>
-            <th>{{ barang2_kategori3 }}</th>
-            <td style="text-align: center;">{{ stok2_kategori3 }}</td>
-            <td style="text-align: center;">Rp{{ harga2_kategori3 }},00</td>
-          </tr>
-    </table>
+    .text-blue {
+    color: rgb(0, 94, 255);
+    }
 
-    <p>
-      <br>
-      <h2>- Transaction History -</h2>
-      <td>Nama akun: {{ name }}</td>
-    </p>
+    body {
+    background-color: rgb(232, 237, 255);
+    }
 
-    <p>
-      <td>Total Transaksi yang Sudah Dilakukan: {{ products|length }}</td>
-    </p>
-    
-    <p>
-      <td>Total Barang yang Sudah Terjual: {{ jumlah_total }}</td>
-    </p>
+    /* Memberikan margin atas pada container-fluid */
+    #content-container {
+        margin-top: 20px; /* Sesuaikan dengan margin yang Anda inginkan */
+    }
 
-    <table border="1", style="width:75%">
-      <tr>
-          <th>Nama Produk</th>
-          <th>Jumlah Produk</th>
-          <th>(+)</th>
-          <th>(-)</th>
-          <th>Review Pengalaman Berbelanja</th>
-          <th>Tanggal Pembelian</th>
-          <th>Hapus Transaksi</th>
-      </tr>
-  
-      {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-  
-      {% for product in products %}
-          <tr>
-              <td style="text-align: center;">{{product.name_1}}</td>
-              <td style="text-align: center;">{{product.amount}}</td>
-              <td style="text-align: center;">
-                <form method="post" action="{% url 'main:increase_product' product.id %}">
-                    {% csrf_token %}
-                    <button type="submit">+</button>
-                </form>
-              </td>
-              <td style="text-align: center;">
-                  <form method="post" action="{% url 'main:decrease_product' product.id %}">
-                      {% csrf_token %}
-                      <button type="submit">-</button>
-                  </form>
-              <td style="text-align: center;">{{product.description}}</td>
-              <td style="text-align: center;">{{product.date_added}}</td>
-              <td style="text-align: center;">
-                  <form method="post" action="{% url 'main:delete_product' product.id %}">
-                    {% csrf_token %}
-                    <button type="submit">Hapus</button>
-                  </form>
-              </td>
-          </tr>
-      {% endfor %}
-    </table>
-  
-  <h5>Sesi terakhir login: {{ last_login }}</h5>
+    /* Menghapus margin atas pada navbar */
+    .navbar {
+        margin-top: 0;
+    }
 
-  <br />
-  
-  <a href="{% url 'main:create_product' %}">
-      <button>
-          Catat Transaksi Baru
-      </button>
-  </a>
+    /* Warna awal button */
+    .btn-logout {
+        background-color: transparent;
+        color: red;
+    }
 
-  <a href="{% url 'main:logout' %}">
-    <button>
-        Logout
+    /* Warna saat tombol di-hover */
+    .btn-logout:hover {
+        background-color: red;
+        color: white;
+    }
+
+    .different-color {
+    background-color: rgb(240, 255, 238);
+    border: 1px solid rgb(0, 94, 255);
+    }
+
+    /* Memberikan margin atas pada container-display */
+    #content-display {
+        margin-top: 20px; /* Sesuaikan dengan margin yang Anda inginkan */
+    }
+
+    /* Memberikan margin atas pada container-fluid */
+    #last-updater {
+        margin-top: 20px; /* Sesuaikan dengan margin yang Anda inginkan */
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
+    <div class="container-fluid">
+    <a class="navbar-brand mb-0 h1" href="#">
+        <span class="text-black">Pachill</span><span class="text-blue">.Market</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
-</a>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="{% url 'main:show_main' %}">[Home]</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'main:create_product' %}">[Tambah Produk Baru]</a>
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            </div>
+        </div>
 
-  <p>
-    <br>
-    <br>
-    <br>
-    <i>Last updated by: {{ nama_updater }}</i>
-  </p>
+        <div class="ms-auto d-flex align-items-center">
+        <span style="margin-right: 15px;">
+            Welcome, <strong>{{ name }}</strong>!</br>
+            <small>Last login: {{ last_login }}</small>
+        </span>
+        <a href="{% url 'main:logout' %}">
+          <button class="btn btn-outline-success btn-logout" type="submit" style="border-color: red;">Log Out</button>
+        </a>
+    </div>
+    </div>
+</nav>
+
+<div class="container-fluid h-100" id="content-display">
+  <div class="row h-100 justify-content-center align-items-center">
+      <div class="col-md-6 bg-light p-4"> <!-- Adjust the column size if needed -->
+          <h1 class="text-center mb-4">Pachill Market Stock Manager</h1>
+          <p class="text-center">
+              Platform pengelola stok supermarket idaman kamu :D
+          </p>
+      </div>
+  </div>
+</div>
+
+
+</br>
+
+    <div class="container">
+      <div class="row">
+  
+        {% for product in products %}
+          <div class="col-md-4 mb-4">
+            <div class="card {% if forloop.counter == products|length %}different-color{% endif %}">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.name_1}}</h5>
+                    <p class="card-text">{{product.description}}</p>
+                    <p><strong>Harga Produk:</strong> Rp. {{product.price}},-</p>
+                    <p><strong>Jumlah Produk:</strong> {{product.amount}}</p>
+                    <p><strong>Tanggal Produk Masuk:</strong> {{product.date_added}}</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                      <form method="post" action="{% url 'main:decrease_product' product.id %}">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-primary">-</button>
+                      </form>
+
+                      <form method="post" action="{% url 'main:edit_product' product.pk %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-warning">Edit</button>
+                    </form>
+
+                      <form method="post" action="{% url 'main:delete_product' product.id %}">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger">Hapus</button>
+                      </form>
+                      
+                      <form method="post" action="{% url 'main:increase_product' product.id %}">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-primary">+</button>
+                      </form>
+                  </div>                                             
+                </div>
+              </div>
+          </div>
+        {% endfor %}
+
+        <!-- Informasi Produk -->
+        <div class="col-md-4">
+          <div class="my-3">
+              <strong>Total Jenis Produk Yang Masuk:</strong> 
+              <span>{{ products|length }} jenis produk</span>
+          </div>
+          <div class="my-3">
+              <strong>Jumlah Total Produk yang Tersimpan:</strong> 
+              <span>{{ jumlah_total }} buah</span>
+          </div>
+        </div>
+
+        <div class="container-fluid h-100" id="last-updater">
+          <div class="row h-100 justify-content-center align-items-center">
+              <div class="col text-center">
+                  <div class="my-3">
+                    <i>Last updated by: {{ nama_updater }}</i>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+</div>
 {% endblock content %}

@@ -18,39 +18,6 @@ def show_main(request):
     jumlah_total = sum(product.amount for product in products)
 
     context = {
-        # Kategori 1
-        'kategori_1': 'Makanan',
-        # Barang 1 (Kategori 1)
-        'barang1_kategori1': 'Roti', # Nama
-        'stok1_kategori1': '40', # Jumlah stok
-        'harga1_kategori1': '6.000', # Harga
-        # Barang 2 (Kategori 1)
-        'barang2_kategori1': 'Mie instan', # Nama
-        'stok2_kategori1': '65', # Jumlah stok
-        'harga2_kategori1': '3.000', # Harga
-
-        # Kategori 2
-        'kategori_2': 'Minuman',
-        # Barang 1 (Kategori 2)
-        'barang1_kategori2': 'Air mineral', # Nama
-        'stok1_kategori2': '75', # Jumlah stok
-        'harga1_kategori2': '3.500', # Harga
-        # Barang 2 (Kategori 2)
-        'barang2_kategori2': 'Susu kotak', # Nama
-        'stok2_kategori2': '50', # Jumlah stok
-        'harga2_kategori2': '7.500', # Harga
-
-        # Kategori 3
-        'kategori_3': 'Alat Tulis',
-        # Barang 1 (Kategori 2)
-        'barang1_kategori3': 'Pulpen gel', # Nama
-        'stok1_kategori3': '50', # Jumlah stok
-        'harga1_kategori3': '6.500', # Harga
-        # Barang 2 (Kategori 2)
-        'barang2_kategori3': 'Buku tulis', # Nama
-        'stok2_kategori3': '20', # Jumlah stok
-        'harga2_kategori3': '5.500', # Harga
-
         # Nama yang membuat update terakhir
         'nama_updater': 'Ramadhan Andika Putra (2206081976) - PBP A',
 
@@ -70,11 +37,14 @@ def create_product(request):
         product.user = request.user
         product.save()
         return HttpResponseRedirect(reverse('main:show_main'))
-
     else:
         form = ProductForm()
 
-    context = {'form': form}
+    context = {
+        'form': form,
+        'name': request.user.username,
+        'last_login': request.COOKIES['last_login'],
+    }
     return render(request, "create_product.html", context)
 
 def delete_product(request, product_id):
@@ -107,6 +77,25 @@ def decrease_product(request, product_id):
         # Handle jika produk tidak ditemukan
         pass
 
+def edit_product(request, id):
+    # Get product berdasarkan ID
+    product = Product.objects.get(pk = id)
+
+    # Set product sebagai instance dari form
+    form = ProductForm(request.POST or None, instance=product)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {
+        'form': form,
+        'name': request.user.username,
+        'last_login': request.COOKIES['last_login'],
+    }
+    return render(request, "edit_product.html", context)
+
 def register(request):
     form = UserCreationForm()
 
@@ -127,7 +116,9 @@ def login_user(request):
         if user is not None:
             login(request, user)
             response = HttpResponseRedirect(reverse("main:show_main")) 
-            response.set_cookie('last_login', str(datetime.datetime.now()))
+            last_login_time = datetime.datetime.now().replace(microsecond=0)  # Removes microseconds
+            formatted_last_login = last_login_time.strftime('%Y-%m-%d %H:%M:%S')  # Formats to string with desired format
+            response.set_cookie('last_login', formatted_last_login)
             return response
         else:
             messages.info(request, 'Maaf, username atau password yang anda berikan salah. Mohon coba lagi! :D')
