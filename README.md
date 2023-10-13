@@ -208,9 +208,3 @@ Fetch API dan jQuery AJAX adalah dua teknologi yang sering digunakan untuk melak
 Menurut saya, tidak ada pendapat yang objektif mengenai "yang mana yang lebih baik", karena hal tersebut sangat tergantung pada kebutuhan proyek. Jika kita membangun sebuah aplikasi modern dan tidak memerlukan dukungan untuk browser lawas, Fetch API mungkin lebih sesuai karena sintaksnya yang lebih modern dan karena ia tidak memerlukan pustaka tambahan. Sebaliknya, jika kita memerlukan kompatibilitas lintas browser atau ingin memanfaatkan fitur-fitur jQuery lainnya, maka jQuery AJAX mungkin lebih sesuai.
 
 Oleh karena itu, penting bagi kita untuk mempertimbangkan kebutuhan dan batasan proyek sebelum memilih antara Fetch API dan jQuery AJAX.
-<br>
-<<<<<<< HEAD
-<br>
-=======
-<br>
->>>>>>> f4bac413d1a7936f0ea6ec83db0cf78ab21a61be
