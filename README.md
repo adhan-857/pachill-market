@@ -523,7 +523,7 @@ Secara umum, Bootstrap cocok untuk proyek yang membutuhkan tampilan web yang sta
 # Tugas 6: JavaScript dan Asynchronous JavaScript
 ### Ramadhan Andika Putra (2206081976) - PBP A <br>
 
-*[ Link adaptable: http://ramadhan-andika-tugas.pbp.cs.ui.ac.id/ ]*
+*[ Link web tugas: http://ramadhan-andika-tugas.pbp.cs.ui.ac.id/ ]*
 
 #### Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*!
 >> #### [ Ubahlah kode cards data item agar dapat mendukung AJAX GET. ]
