@@ -92,81 +92,151 @@
 </nav>
 
 <div class="container-fluid h-100" id="content-display">
-  <div class="row h-100 justify-content-center align-items-center">
-      <div class="col-md-6 bg-light p-4"> <!-- Adjust the column size if needed -->
-          <h1 class="text-center mb-4">Pachill Market Stock Manager</h1>
-          <p class="text-center">
-              Platform pengelola stok supermarket idaman kamu :D
-          </p>
-      </div>
-  </div>
-</div>
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-md-6 bg-light p-4 text-center">
+            <h1 class="text-center mb-4">Pachill Market Stock Manager</h1>
+            <p class="text-center">
+                Platform pengelola stok supermarket idaman kamu :D
+            </p>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah Produk by AJAX</button>
+        </div>
+    </div>
+  </div>  
 
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form" onsubmit="return false;">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name_1" class="col-form-label">Nama Produk:</label>
+                        <input type="text" class="form-control" id="name_1" name="name_1"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="col-form-label">Harga Produk:</label>
+                        <input type="number" class="form-control" id="price" name="price"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="col-form-label">Jumlah Produk:</label>
+                        <input type="number" class="form-control" id="amount" name="amount"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label">Deskripsi Produk:</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+  </div>
 
 </br>
 
-    <div class="container">
-      <div class="row">
-  
-        {% for product in products %}
-          <div class="col-md-4 mb-4">
-            <div class="card {% if forloop.counter == products|length %}different-color{% endif %}">
-                <div class="card-body">
-                    <h5 class="card-title">{{product.name_1}}</h5>
-                    <p class="card-text">{{product.description}}</p>
-                    <p><strong>Harga Produk:</strong> Rp. {{product.price}},-</p>
-                    <p><strong>Jumlah Produk:</strong> {{product.amount}}</p>
-                    <p><strong>Tanggal Produk Masuk:</strong> {{product.date_added}}</p>
-                    
-                    <div class="d-flex justify-content-between align-items-center">
-                      <form method="post" action="{% url 'main:decrease_product' product.id %}">
-                          {% csrf_token %}
-                          <button type="submit" class="btn btn-primary">-</button>
-                      </form>
-
-                      <form method="post" action="{% url 'main:edit_product' product.pk %}">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-warning">Edit</button>
-                    </form>
-
-                      <form method="post" action="{% url 'main:delete_product' product.id %}">
-                          {% csrf_token %}
-                          <button type="submit" class="btn btn-danger">Hapus</button>
-                      </form>
-                      
-                      <form method="post" action="{% url 'main:increase_product' product.id %}">
-                          {% csrf_token %}
-                          <button type="submit" class="btn btn-primary">+</button>
-                      </form>
-                  </div>                                             
-                </div>
-              </div>
-          </div>
-        {% endfor %}
-
-        <!-- Informasi Produk -->
-        <div class="col-md-4">
-          <div class="my-3">
-              <strong>Total Jenis Produk Yang Masuk:</strong> 
-              <span>{{ products|length }} jenis produk</span>
-          </div>
-          <div class="my-3">
-              <strong>Jumlah Total Produk yang Tersimpan:</strong> 
-              <span>{{ jumlah_total }} buah</span>
-          </div>
-        </div>
-
-        <div class="container-fluid h-100" id="last-updater">
-          <div class="row h-100 justify-content-center align-items-center">
-              <div class="col text-center">
-                  <div class="my-3">
-                    <i>Last updated by: {{ nama_updater }}</i>
-                  </div>
-              </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
+<div id="product-list" class="row h-100 justify-content-center align-items-center">
+    <!-- Elemen baru untuk menampung daftar produk -->
 </div>
+
+
+<!-- Informasi Produk -->
+<div class="my-3 text-center">
+    <strong>Total Jenis Produk Yang Masuk:</strong> 
+    <span id="totalJenisProduk">{{ products|length }} jenis produk</span>
+</div>
+<div class="my-3 text-center">
+    <strong>Jumlah Total Produk yang Tersimpan:</strong> 
+    <span>{{ jumlah_total }} buah</span>
+</div>
+
+<div class="container-fluid h-100" id="last-updater">
+   <div class="row h-100 justify-content-center align-items-center">
+      <div class="col text-center">
+          <div class="my-3">
+             <i>Last updated by: {{ nama_updater }}</i>
+                  </div>
+       </div>
+  </div>
+</div>
+
+  <script>
+    async function getProducts() {
+        return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+    }
+
+    async function refreshProducts() {
+        const productList = document.getElementById("product-list");
+        
+        productList.innerHTML = "";  
+
+        const products = await getProducts();
+        
+        document.getElementById("totalJenisProduk").innerText = `${products.length} jenis produk`;
+        
+        let cardHtmlString = "";
+
+        products.forEach((item, index) => {
+            let cardClass = "";
+            if (index === products.length - 1) {
+                cardClass = "different-color";
+            }
+
+            cardHtmlString += `
+            <div class="col-md-4 mb-4">
+                <div class="card ${cardClass}">
+                    <div class="card-body">
+                        <h5 class="card-title">${item.fields.name_1}</h5>
+                        <p class="card-text">${item.fields.description}</p>
+                        <p><strong>Harga Produk:</strong> Rp. ${item.fields.price},-</p>
+                        <p><strong>Jumlah Produk:</strong> ${item.fields.amount}</p>
+                        <p><strong>Tanggal Produk Masuk:</strong> ${item.fields.date_added}</p>
+                        <div class="text-center">
+                            <button class="btn btn-danger delete-product" data-product-id="${item.pk}">Hapus by AJAX</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+
+        productList.innerHTML = `<div class="row h-100 justify-content-center align-items-center">${cardHtmlString}</div>`;
+  
+        const deleteButtons = document.querySelectorAll('.delete-product');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const productId = e.target.getAttribute('data-product-id');
+                deleteProduct(productId);
+            });
+        });
+    }
+    refreshProducts()
+
+    function addProduct() {
+        fetch("{% url 'main:add_product_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts)
+
+        document.getElementById("form").reset()
+        return false
+    }
+    document.getElementById("button_add").onclick = addProduct
+
+    async function deleteProduct(productId) {
+        const url = `{% url 'main:delete_product_ajax' %}?id=${productId}`;
+        const response = await fetch(url, { method: 'DELETE' });
+        if (response.ok) {
+            refreshProducts();
+        }
+    }
+  </script>
+  
 {% endblock content %}

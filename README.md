@@ -1,121 +1,212 @@
-# Tugas 4: Implementasi Autentikasi, *Session*, dan *Cookies* pada Django
+# Tugas 6: JavaScript dan Asynchronous JavaScript
 ### Ramadhan Andika Putra (2206081976) - PBP A <br>
+#### Link: http://ramadhan-andika-tugas.pbp.cs.ui.ac.id/
 
 #### Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*!
->> #### [ Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar. ]
->> Pertama, saya membuat fungsi dengan nama *register* yang menerima parameter request pada *views.py* yang berada pada subdirektori *main*. Lalu, saya memanfaatkan UserCreationForm sebagai impor formulir bawaan yang memudahkan pembuatan formulir pendaftaran pengguna dalam aplikasi web. Dengan formulir ini, pengguna baru dapat mendaftar dengan mudah di situs web yang saya buat. Setelah itu, saya mengimpor fungsi *register* yang telah dibuat pada *urls.py* yang terdapat pada subdirektori *main*. Tak lupa. saya menambahkan *path url* ke dalam *urlpatterns* untuk mengakses fungsi yang sudah diimpor tadi.
+>> #### [ Ubahlah kode cards data item agar dapat mendukung AJAX GET. ]
+>> Mengubah kode cards data item agar dapat mendukung AJAX GET melibatkan beberapa langkah. Salah satu aspek pentingnya adalah memastikan data yang diambil dari server bisa dinamis ditampilkan pada elemen HTML. Berikut cara saya mengimplementasikannya:<br>
+>> <br>
+>> **1) Fetch Data Dengan AJAX**<br>
+>> Saya menggunakan fetch() API. Fungsi getProducts() akan mengambil data dari server dan mengembalikannya sebagai Promise.<br>
+>> <img width="385" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/2372a0f3-18f4-4337-b20e-a570118ec8cd">
+>> <br>
 >>
->> Langkah selanjutnya, saya membuat fungsi dengan nama *login_user* yang menerima parameter request pada *views.py* yang berada pada subdirektori *main*. Lalu, saya mengimpor *function authenticate, login* untuk melakukan autentikasi dan *login* jika autentikasi berhasil. Setelah itu, saya mengimpor fungsi *login_user* yang telah dibuat pada *urls.py* yang terdapat pada subdirektori *main*. Tak lupa. saya menambahkan *path url* ke dalam *urlpatterns* untuk mengakses fungsi yang sudah diimpor tadi.
+>> **2) Pembuatan Card Dinamis**<br>
+>> Fungsi refreshProducts() bertanggung jawab untuk membuat cards berdasarkan data yang diambil.<br>
+>> <img width="560" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/b64fadbf-7e8d-4bde-8e6e-54bafbc778ac">
+>> <br>
 >>
->> Yang terakhir, saya membuat fungsi dengan nama *logout_user* yang menerima parameter request pada *views.py* yang berada pada subdirektori *main*. Lalu, saya mengimpor *logout* pada bagian paling atas. Setelah itu, saya mengimpor fungsi *logout_user* yang telah dibuat pada *urls.py* yang terdapat pada subdirektori *main*. Tak lupa. saya menambahkan *path url* ke dalam *urlpatterns* untuk mengakses fungsi yang sudah diimpor tadi
+>> **3) Menampilkan Data**<br>
+>> Ini adalah bagian di mana saya memasukkan data ke dalam elemen HTML. Dalam kasus ini, saya menggunakan elemen dengan id product-list.
+>>
+>> **4) Refresh Data**<br>
+>> Setiap kali ada penambahan atau pengurangan produk, saya memanggil ulang refreshProducts() untuk memperbarui tampilan.<br>
+>> <img width="414" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/cadaa48d-9ca2-4265-b412-70cbc412c0e9">
+
 <br>
 
->> #### [ Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal. ]
->> #### [ Menghubungkan model Item dengan User. ]
->> Untuk saat ini semua akun akan terhubung ke data yang sama entah siapapun yang membuatnya. Sekarang kita akan membuat user menjadi bagian dari models agar setiap account memiliki datanya masing-masing. Langkah pertama, kita akan menambahkan user pada class Item pada models.py di subdirektori main. Lalu, kita akan mengubah function show_main dan create_product pada views.py di direktor main agar kita dapat menampilkan objek Product yang terasosiasikan dengan pengguna yang sedang login. Hal tersebut dilakukan dengan menyaring seluruh objek dengan hanya mengambil Product yang dimana field user terisi dengan objek User yang sama dengan pengguna yang sedang login.
+>> #### [ Lakukan pengambilan task menggunakan AJAX GET. ]
+>> Pada kode saya, AJAX (Asynchronous JavaScript and XML) digunakan untuk berkomunikasi antara frontend dan backend tanpa perlu memuat ulang halaman web secara keseluruhan. Dalam kasus ini, ada beberapa contoh bagaimana AJAX GET digunakan, khususnya untuk pengambilan daftar produk dari server.<br>
+>> <br>
+>> **1) Fungsi JavaScript untuk Melakukan AJAX GET**<br>
+>> Fungsi *getProducts* adalah fungsi asinkron yang menggunakan fetch API untuk melakukan permintaan HTTP GET ke endpoint yang telah ditentukan:<br>
+>> <img width="389" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/fed53a78-908b-4126-9a1e-3de22d9d02d4">
+>> <br>
 >>
->> Selanjutnya, karena kita mengubah models.py maka kita perlu melakukan migrasi dengan menjalankan *python manage.py makemigrations* dan *python manage.py migrate* untuk mengaplikasikan migrasi yang dilakukan. Kita bisa mencobanya dengan membuat akun baru dan login dengan akun yang baru dibuat. Jika kita mengamati halaman utama, produk yang tadi telah dibuat dengan akun sebelumnya tidak akan ditampilkan di halaman pengguna akun yang baru saja kita buat.
+>> **2) Menggunakan Fungsi di Dalam Fungsi Lain**<br>
+>> Fungsi *getProducts* tersebut kemudian digunakan dalam fungsi *refreshProducts*:<br>
+>> <img width="462" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/4f4d0a0a-5e4e-49dc-91c6-4b518c9a46b0">
+>> <br>
+>> * Fungsi ini pertama-tama mengosongkan elemen yang akan menampilkan daftar produk.
+>> * *await getProducts();* memanggil fungsi *getProducts* dan menunggu hingga permintaan selesai. Hasil dari fungsi ini (yaitu, array dari produk) disimpan dalam variabel *products*.
+>> <br>
+>> 
+>> **3) Menginisiasi Permintaan AJAX**<br>
+>> Fungsi *refreshProducts* dijalankan untuk pertama kali di bagian bawah kode untuk memuat produk saat halaman dimuat:<br>
+>> <img width="121" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/e31a7060-8453-440f-9a27-a919a64975d4">
+>>
+>> Dengan demikian, proses pengambilan task menggunakan AJAX GET dalam kode saya dilakukan dengan cara yang terstruktur dan asinkron, memungkinkan halaman web tetap responsif selama proses komunikasi dengan server.
+
 <br>
 
->> #### [ Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi. ]
->> Untuk mengimplementasikan checklist ini, saya memanfaatkan cookies yang ada pada Django. Pada views.py di direktori main, saya menambahkan import datetime. Setelah itu, saya mengubah fungsi login_user agar men-set cookies dengan key last_login dengan waktu saat ini. Lalu, saya juga menambahkan variable last_login yang datanya berasal dari COOKIES di dalam context pada fungsi show_main. Setelah itu, saya juga mengubah function logout_user agar dapat menghapus cookie last_login saat pengguna melakukan logout.
+>> #### [ Buatlah sebuah tombol yang membuka sebuah modal dengan form untuk menambahkan item. ]
+>> Saya membuat tombol "Tambah Produk by AJAX" yang berfungsi untuk membuka sebuah modal yang berisi formulir untuk menambahkan sebuah item atau produk baru. Ini adalah sebuah implementasi berbasis AJAX (Asynchronous JavaScript and XML), yang memungkinkan proses penambahan produk untuk dijalankan tanpa perlu memuat ulang halaman.
 >>
->> Langkah terakhir, saya menambahkan potongan kode tambahkan berikut di antara tabel dan tombol logout untuk menampilkan data last login pada halaman utama aplikasi. <br>
->> *...*
->> *<h5>Sesi terakhir login: {{ last_login }}</h5>*
->> *...*
+>> Ketika tombol ini diklik, ia akan membuka sebuah modal *(#exampleModal)* yang berisi formulir untuk menambahkan produk. Ini adalah aksi yang dilakukan melalui atribut *data-bs-toggle* dan *data-bs-target*.
 >>
->> Sekarang, jika kita mnelakukan login maka akan terlihat tampilan data last login kita pada halaman utama aplikasi.
+>> Modal tersebut berisi formulir dengan beberapa elemen input:
+>> * Nama Produk: Sebuah input tipe teks
+>> * Harga Produk: Sebuah input tipe angka
+>> * Jumlah Produk: Sebuah input tipe angka
+>> * Deskripsi Produk: Sebuah textarea
+>>
+>> Formulir ini dikendalikan oleh JavaScript untuk mengambil nilai dari elemen-elemen ini dan mengirimkannya ke server.
+>>
+>> Dalam potongan kode JavaScript, ada beberapa fungsi penting:<br>
+>> * *getProducts()*: Mengambil daftar produk saat ini dari server.
+>> * *refreshProducts()*: Memperbarui tampilan daftar produk di halaman.
+>> * *addProduct()*: Fungsi yang dipanggil ketika tombol "Add Product" di modal diklik.
+>>
+>> <br>
+>> <img width="296" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/f374ac62-32e5-41b2-808f-24c35b0338d0">
+>> <br>
+>> Ketika tombol "Add Product" diklik, fungsi addProduct() dipanggil. Fungsi ini melakukan sebuah request POST ke URL yang ditentukan ({% url 'main:add_product_ajax' %}). Ia mengirim data dari formulir sebagai FormData. Setelah request sukses, daftar produk akan diperbarui dengan memanggil refreshProducts().
+
+<br>
+
+>> #### [ Buatlah fungsi view baru untuk menambahkan item baru ke dalam basis data. ]
+>> Saya membuat sebuah fungsi baru pada *views.py* dengan nama *add_product_ajax* yang menerima parameter *request*. Setelah itu, saya melakukan impor *from django.views.decorators.csrf import csrf_exempt* pada berkas *views.py*. Yang terakhir, saya menambahkan dekorator *@csrf_exempt* di atas fungsi *add_product_ajax* yang sudah dibuat.<br>
+>> <img width="531" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/15ed9354-2bb2-43a7-acda-abb9206866a4">
+
+
+<br>
+
+>> #### [ Buatlah path /create-ajax/ yang mengarah ke fungsi view yang baru kamu buat. ]
+>> saya melakukan impor fungsi *get_product_json* serta *add_product_ajax* pada berkas *urls.py* yang berada pada folder main. Lalu, saya menambahkan *path url* kedua fungsi tersebut ke dalam *urlpatterns*.<br>
+>> <img width="365" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/03844a50-d2b2-44d7-8ba3-a111b2d3bb72">
+
+
+<br>
+
+>> #### [ Hubungkan form yang telah kamu buat di dalam modal kamu ke path /create-ajax/. ]
+>> Pada bagian HTML di dalam modal, saya telah membuat sebuah form dengan elemen-elemen seperti input teks, input angka, dan textarea. Form ini akan digunakan untuk mengumpulkan informasi tentang produk baru yang akan ditambahkan.<br>
+>> <br>
+>> <img width="266" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/259af42e-e0b3-4838-bd18-30389776df5e">
+>> <br>
+>> Dalam form di atas, {% csrf_token %} digunakan untuk menyertakan token CSRF yang diperlukan untuk melindungi aplikasi Anda dari serangan CSRF (Cross-Site Request Forgery).
+>>
+>> Di dalam kode JavaScript yang saya buat, terdapat fungsi addProduct() yang dipanggil saat tombol "Add Product" pada modal ditekan. Fungsi ini mengirimkan data form ke path {% url 'main:add_product_ajax' %} menggunakan metode POST. <br>
+>> <br>
+>> <img width="305" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/ca28c1e8-d131-482c-b5c6-37bd189d8de6">
+>> <br>
+>> * Fungsi fetch() digunakan untuk mengirim permintaan POST ke path yang ditentukan.
+>> * new FormData(document.querySelector('#form')) digunakan untuk mengambil data yang diisi dalam form HTML.
+>> * Setelah data dikirimkan, fungsi refreshProducts() dipanggil untuk memperbarui daftar produk.
+>>
+>> Dengan menghubungkan form tersebut ke path {% url 'main:add_product_ajax' %} melalui JavaScript seperti di atas, kita dapat menambahkan produk baru ke dalam aplikasi web Anda secara dinamis menggunakan teknik AJAX tanpa harus me-refresh seluruh halaman.
+
+<br>
+
+>> #### [ Lakukan refresh pada halaman utama secara asinkronus untuk menampilkan daftar item terbaru tanpa reload halaman utama secara keseluruhan. ]
+>> Untuk melakukan refresh pada halaman utama secara asinkronus untuk menampilkan daftar item terbaru tanpa reload halaman utama secara keseluruhan, saya menggunakan JavaScript dan teknik AJAX. Berikut adalah prosesnya:
+>> 1) Pada awalnya, ada fungsi refreshProducts() yang dipanggil saat halaman dimuat atau saat ada perubahan yang memerlukan pembaruan daftar produk.
+>> 2) Fungsi refreshProducts() melakukan hal-hal berikut:
+>>    * Mengambil elemen HTML dengan id "product-list" yang akan digunakan untuk menampilkan daftar produk.
+>>    * Mengosongkan konten dari elemen "product-list" dengan mengatur productList.innerHTML = "";. Hal ini dilakukan untuk membersihkan daftar produk yang mungkin sudah ditampilkan sebelumnya.
+>> 3) Selanjutnya, fungsi ini melakukan permintaan GET ke path {% url 'main:get_product_json' %} menggunakan fetch(). Path ini mengembalikan data JSON yang berisi daftar produk terbaru.
+>> 4) Setelah mendapatkan data produk dalam bentuk JSON, fungsi ini mengubah tampilan HTML dengan mengisi ulang elemen "product-list" dengan produk-produk yang baru. Ini dilakukan dengan mengonversi data JSON ke dalam HTML dan menambahkannya ke dalam cardHtmlString.
+>> 5) Terakhir, hasil dari cardHtmlString diisikan kembali ke dalam elemen "product-list" dengan productList.innerHTML = ....
+
+<br>
+
+>> #### [ Melakukan perintah collectstatic. ]
+>> Jalankan perintah collectstatic menggunakan manajer perintah Django, yaitu manage.py:<br>
+>> <img width="181" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/b3d265c8-1343-456c-81c9-8f07f524bf22">
+>> <br>
+>> Perintah ini akan mengumpulkan semua file statis dari aplikasi saya, termasuk file CSS, JavaScript, dan gambar, dan menyalinnya ke folder "static" yang saya tentukan dalam pengaturan.
+>>
+>> Dengan menjalankan perintah collectstatic, saya akan memiliki semua file statis yang diperlukan untuk aplikasi saya yang akan tersedia dalam satu direktori yang siap untuk disajikan saat proyek Anda berada dalam mode produksi.
+
+
 <br>
 <br>
 
-#### Apa itu Django *UserCreationForm*, dan jelaskan apa kelebihan dan kekurangannya?
+#### Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
 *Jawab:* <br>
-Django UserCreationForm adalah sebuah form yang disediakan oleh kerangka kerja Django yang dapat digunakan untuk membuat pengguna baru di Django. Form ini sudah terintegrasi dengan sistem autentikasi Django, sehingga pengguna baru yang dibuat dengan form ini akan langsung dapat login ke aplikasi Django.
+Asynchronous programming dan synchronous programming adalah dua pendekatan yang berbeda dalam pemrograman komputer. Perbedaan utama antara kedua pendekatan ini adalah cara mereka menangani tugas-tugas yang berjalan secara bersamaan.
 
-Kelebihan Django UserCreationForm:
-* **Mudah digunakan**. Django UserCreationForm sudah memiliki semua field yang dibutuhkan untuk membuat pengguna baru, sehingga pengguna tidak perlu membuat form sendiri.
-* **Terintegrasi dengan sistem autentikasi Django**. Pengguna baru yang dibuat dengan Django UserCreationForm akan langsung dapat login ke aplikasi Django.
-* **Dapat disesuaikan**. Django UserCreationForm dapat disesuaikan dengan kebutuhan aplikasi. Misalnya, pengguna dapat menambahkan field tambahan, seperti alamat email atau nomor telepon.
+Asynchronous programming adalah pendekatan yang memungkinkan tugas-tugas berjalan secara bersamaan, tanpa menunggu tugas sebelumnya selesai. Hal ini dilakukan dengan menggunakan thread atau proses yang berbeda untuk menjalankan tugas-tugas tersebut. Asynchronous programming dapat meningkatkan kinerja aplikasi karena memungkinkan aplikasi untuk menangani lebih banyak tugas dalam waktu yang lebih singkat.
 
-Kekurangan Django UserCreationForm:
-* **Tidak dapat digunakan untuk membuat pengguna dengan peran khusus**. Django UserCreationForm hanya dapat digunakan untuk membuat pengguna dengan peran default, yaitu "user".
-* **Tidak dapat digunakan untuk membuat pengguna dengan data yang sudah ada**. Django UserCreationForm hanya dapat digunakan untuk membuat pengguna baru.
+Synchronous programming adalah pendekatan yang mengharuskan tugas-tugas diselesaikan satu per satu. Hal ini dilakukan dengan menggunakan satu thread atau proses untuk menjalankan semua tugas. Synchronous programming dapat lebih mudah untuk dipahami dan ditulis, tetapi dapat mengurangi kinerja aplikasi karena aplikasi harus menunggu tugas sebelumnya selesai sebelum melanjutkan ke tugas berikutnya.
+<br>
 
-Secara keseluruhan, UserCreationForm sangat berguna untuk skenario umum pembuatan pengguna dalam aplikasi Django, tetapi perlu dipertimbangkan dengan hati-hati jika kita memiliki kebutuhan yang sangat khusus atau kompleks dalam proses pendaftaran pengguna kita.
+Perbedaan antara keduanya:
+| Karakteristik    |     Asynchronous programming       |      Synchronous programming    |
+| ---------------- | ---------------------------------- | ------------------------------- |
+| Cara menangani tugas	| Tugas berjalan secara bersamaan	| Tugas diselesaikan satu per satu
+| Performa	| Dapat meningkatkan kinerja	| Dapat mengurangi kinerja
+| Kemudahan penggunaan	| Lebih kompleks	| Lebih mudah
+| Contoh	| Web server, aplikasi real-time	| Aplikasi desktop, aplikasi batch
+<br>
+
+Asynchronous programming cocok untuk digunakan dalam aplikasi yang membutuhkan kinerja tinggi atau yang harus menangani tugas-tugas yang berjalan secara bersamaan. Beberapa contoh aplikasi yang menggunakan asynchronous programming adalah:
+* Web server: Web server menggunakan asynchronous programming untuk menangani permintaan HTTP dari banyak klien secara bersamaan.
+* Aplikasi real-time: Aplikasi real-time, seperti aplikasi obrolan dan game, menggunakan asynchronous programming untuk memastikan respons yang cepat.
+* Aplikasi mobile: Aplikasi mobile sering kali menggunakan asynchronous programming untuk menghemat daya baterai.
+<br>
+
+Synchronous programming cocok untuk digunakan dalam aplikasi yang sederhana atau yang tidak membutuhkan kinerja tinggi. Beberapa contoh aplikasi yang menggunakan synchronous programming adalah:
+* Aplikasi desktop: Aplikasi desktop, seperti pengolah kata dan spreadsheet, sering kali menggunakan synchronous programming untuk kemudahan penggunaan.
+* Aplikasi batch: Aplikasi batch, seperti tugas pencadangan dan pengunduhan, sering kali menggunakan synchronous programming untuk meningkatkan kinerja.
 <br>
 <br>
 
-#### Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+#### Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.
 *Jawab:* <br>
-Authentication dan authorization adalah dua konsep yang berbeda dalam keamanan komputer. Authentication adalah proses untuk memverifikasi identitas pengguna, sedangkan authorization adalah proses untuk menentukan apakah pengguna memiliki izin untuk mengakses sumber daya tertentu. *(Ibarat sebuah rumah, authentication adalah proses yang memverifikasi bahwa kita adalah pemilik rumah. Authorization adalah proses yang menentukan apakah kita memiliki izin untuk memasuki rumah tersebut.)*
- 
-Untuk lebih detailnya, authentication adalah proses untuk memverifikasi identitas pengguna. Hal ini dilakukan untuk memastikan bahwa pengguna yang mencoba mengakses sistem adalah pengguna yang sah. Authentication dapat dilakukan dengan berbagai metode, seperti menggunakan nama pengguna dan kata sandi, menggunakan token keamanan, atau menggunakan biometrik.
- 
-Sedangkan, authorization adalah proses untuk menentukan apakah pengguna memiliki izin untuk mengakses sumber daya tertentu. Hal ini dilakukan untuk memastikan bahwa pengguna hanya dapat mengakses sumber daya yang mereka berhak akses. Authorization dapat dilakukan dengan berbagai metode, seperti menggunakan peran pengguna, menggunakan kebijakan akses, atau menggunakan kontrol akses berbasis objek.
- 
-Keduanya memiliki beberapa perbedaan, yaitu: <br>
-***Authentication***
-* Memverfikasi siapa pengguna sebenarnya
-* Bekerja menggunakan kata sandi, OTP, informasi biometrik, dan informasi lain yang diberikan atau dimasukkan oleh pengguna
-* Tahap pertama dalam proses pemeriksaan keamanan
-* Terlihat dan sebagian dapat diubah oleh pengguna
- 
-***Authorization***
-* Menentukan sumber daya apa yang dapat diakses pengguna
-* Bekerja berdasarkan peraturan yang telah ditetapkan oleh developer atau organisasi pemilik aplikasi
-* Selalu dijalankan setelah proses authentication selesai
-* Tidak terlihat dan tidak dapat diubah oleh pengguna
+Paradigma Event-Driven Programming adalah suatu paradigma pemrograman yang terfokus pada kejadian atau "event" sebagai mekanisme utama untuk mempengaruhi eksekusi program. Dalam paradigma ini, eksekusi kode biasanya diinisiasi oleh peristiwa yang dihasilkan oleh luaran dari sistem lain, atau oleh interaksi pengguna seperti klik mouse, ketukan pada layar, dan sebagainya. Sebagai respons terhadap event tersebut, program akan menjalankan fungsi atau prosedur tertentu yang disebut sebagai "event handler" atau "callback."
 
-Autentikasi dan otorisasi sangat penting dalam keamanan aplikasi web karena autentikasi membantu memastikan bahwa hanya pengguna yang sah yang dapat mengakses aplikasi, sedangkan otorisasi membantu memastikan bahwa pengguna hanya dapat mengakses sumber daya yang mereka miliki izin untuk mengakses.
+Contoh penerapan Event-Driven Programming pada kode yang Anda berikan dapat ditemukan dalam fungsi AJAX yang digunakan untuk menambah atau menghapus produk. Misalnya, dalam metode add_product_ajax, sebuah event "POST request" menginisiasi eksekusi fungsi tersebut. Jika request ini berhasil, data baru akan ditambahkan ke dalam basis data, dan HTTP response akan dikembalikan. Ini adalah sebuah interaksi yang sepenuhnya digerakkan oleh event, di mana event "POST request" mengaktifkan serangkaian aksi pada server.
+<br>
 
-Tanpa autentikasi, siapa pun dapat mengakses aplikasi kita, bahkan jika mereka tidak memiliki izin untuk melakukannya. Hal ini dapat menyebabkan pencurian data, penyalahgunaan sistem, dan kerusakan lainnya. Tanpa otorisasi, pengguna dapat mengakses semua sumber daya dalam aplikasi Anda, bahkan jika mereka tidak memiliki izin untuk melakukannya. Hal ini dapat menyebabkan kebocoran data, penyalahgunaan sistem, dan kerusakan lainnya.
-
-Oleh karena itu, penting untuk menerapkan autentikasi dan otorisasi yang tepat dalam aplikasi web kita.
+<img width="528" alt="image" src="https://github.com/adhan-857/pachill-market/assets/119088782/ba99f3e7-2dd5-498b-9fd3-5d0bfb77e9ca"><br>
+Dalam kasus ini, paradigma Event-Driven memungkinkan program untuk menunggu dan merespons aksi dari pengguna atau sistem, daripada menjalankan urutan instruksi secara linear.
 <br>
 <br>
 
-#### Apa itu *cookies* dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+#### Jelaskan penerapan asynchronous programming pada AJAX.
 *Jawab:* <br>
-*Cookies* adalah sejumlah kecil data yang disimpan di dalam browser web pengguna saat mereka mengunjungi sebuah situs web. *Cookies* digunakan dalam konteks aplikasi web untuk berbagai tujuan, termasuk mengidentifikasi pengguna, melacak preferensi pengguna, menyimpan data sesi, dan lainnya. Dalam konteks Django, *cookies* dapat digunakan untuk mengelola data sesi pengguna.
+Asynchronous programming dalam konteks AJAX (Asynchronous JavaScript and XML) merujuk pada kemampuan untuk melakukan permintaan data dari server dan memanipulasi tampilan halaman web tanpa perlu memuat ulang seluruh halaman. Dengan AJAX, sebuah aplikasi web dapat mengirim atau menerima data dari server secara asinkron, memungkinkan untuk memperbarui bagian spesifik dari halaman web tanpa menunggu proses unduh atau unggah seluruh konten.
 
-Dalam konteks aplikasi web, *cookie* sering digunakan untuk mengelola data sesi pengguna. Sesi pengguna adalah jangka waktu di mana pengguna berinteraksi dengan aplikasi web. Selama sesi, aplikasi web dapat menyimpan informasi tentang pengguna, seperti:
-* Identitas pengguna
-* Informasi tentang halaman yang telah dikunjungi pengguna
-* Informasi tentang tindakan yang telah dilakukan pengguna
+Secara teknis, AJAX biasanya menggunakan objek `XMLHttpRequest` atau metode fetch modern untuk melakukan permintaan HTTP asinkron. Permintaan ini bisa berjalan di latar belakang dan ketika data diterima dari server, sebuah fungsi "callback" dipanggil untuk memproses data tersebut. Selama proses ini, pengguna masih bisa berinteraksi dengan halaman, yang berarti aplikasi tetap responsif.
 
-Django menggunakan cookie untuk mengelola data sesi pengguna dengan cara berikut:
-* Django membuat *cookie* sesi saat pengguna masuk ke aplikasi web.
-* *Cookie* sesi berisi informasi tentang identitas pengguna, seperti ID pengguna dan nama pengguna.
-* Django menggunakan *cookie* sesi untuk memverifikasi identitas pengguna saat mereka melakukan permintaan ke aplikasi web.
+Sebagai contoh, dalam aplikasi toko online, ketika pengguna menambahkan item ke keranjang belanja, sebuah permintaan AJAX bisa dikirim ke server untuk memperbarui jumlah item di keranjang tanpa perlu memuat ulang seluruh halaman. Hal ini memberikan pengalaman pengguna yang lebih mulus dan efisien.
 
-Django juga menggunakan *cookie* untuk menyimpan preferensi pengguna. Misalnya, Django dapat menggunakan *cookie* untuk menyimpan preferensi bahasa pengguna atau preferensi tampilan.
+Dengan demikian, penerapan asynchronous programming melalui AJAX memungkinkan pengembangan aplikasi web yang lebih dinamis, responsif, dan efisien.
 <br>
 <br>
 
-#### Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+#### Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
 *Jawab:* <br>
-Penggunaan cookies tidak aman secara default dalam pengembangan web. Cookie dapat menjadi kerentanan keamanan jika tidak digunakan dengan benar.
+Fetch API dan jQuery AJAX adalah dua teknologi yang sering digunakan untuk melakukan operasi asinkron dalam pengembangan aplikasi web. Keduanya memiliki kelebihan dan kekurangan masing-masing, dan pilihan antara keduanya seringkali tergantung pada kebutuhan spesifik proyek.
 
-Berikut adalah beberapa risiko potensial yang harus diwaspadai saat menggunakan cookies:
-* **Risiko Keamanan Cookie**: Jika cookies digunakan untuk menyimpan data sensitif seperti token otentikasi atau informasi keuangan, mereka dapat menjadi target serangan peretas. Oleh karena itu, penting untuk mengenkripsi atau melindungi cookies yang berisi data sensitif, seperti dengan menggunakan HTTPS.
-* **Cross-Site Scripting (XSS)**: Jika aplikasi Anda rentan terhadap serangan XSS, peretas dapat mencoba mencuri cookies pengguna. Mereka dapat menginjeksi kode berbahaya yang mencuri cookies atau mengirimkan cookies ke situs jahat. Penggunaan tipe cookie yang aman (secure cookie flag) dan penghindaran dari XSS adalah penting.
-* **Cross-Site Request Forgery (CSRF)**: Serangan CSRF dapat memanfaatkan cookies untuk mengirim permintaan palsu dari browser pengguna yang terotentikasi. Ini dapat menyebabkan perubahan tidak diinginkan dalam status pengguna. Perlindungan CSRF seperti penggunaan token CSRF harus diterapkan.
-* **Keamanan Identitas**: Cookies yang digunakan untuk autentikasi atau sesi pengguna harus diatur dengan benar untuk menghindari serangan peretasan otentikasi, seperti serangan brute force pada kata sandi. Kebijakan keamanan, seperti membatasi jumlah percobaan login, harus diterapkan.
-* **Kebocoran Informasi**: Cookies bisa saja mengandung informasi yang seharusnya tidak terlihat oleh pengguna atau bahkan oleh aplikasi lain pada domain yang sama. Menerapkan aturan kebijakan SameSite pada cookies adalah penting untuk mengontrol perilaku mereka.
-* **Privasi Pengguna**: Pengguna memiliki hak privasi, dan penyimpanan cookies yang berlebihan atau pelacakan yang tidak diinginkan dapat melanggar privasi pengguna. Penting untuk mengikuti praktik-praktik terbaik dalam hal privasi dan peraturan yang berlaku seperti GDPR.
+Fetch API dan jQuery AJAX adalah dua teknologi yang sering digunakan untuk melakukan operasi asinkron dalam pengembangan aplikasi web. Keduanya memiliki kelebihan dan kekurangan masing-masing, dan pilihan antara keduanya seringkali tergantung pada kebutuhan spesifik proyek.
 
-Untuk mengurangi risiko keamanan saat menggunakan cookies, Anda dapat menerapkan langkah-langkah berikut:
-* **Enkripsi cookie**: Enkripsi cookie akan membuat data yang disimpan dalam cookie tidak dapat dibaca oleh orang lain.
-* **Validasi cookie**: Validasi cookie akan membantu memastikan bahwa cookie yang diterima dari browser pengguna adalah cookie yang valid.
-* **Penggunaan cookie sesi**: Cookie sesi hanya akan disimpan di browser pengguna selama sesi aktif. Cookie sesi akan dihapus saat sesi berakhir.
-* **Penggunaan cookie dengan hati-hati**: Hanya simpan informasi yang diperlukan dalam cookie.
+**Fetch API:**
+* **Native API**: Fetch adalah API bawaan browser, sehingga tidak memerlukan pustaka tambahan.
+* **Promises-Based**: Fetch API memanfaatkan Promises, yang membuatnya lebih mudah untuk digunakan daripada callback.
+* **Sederhana dan Ringkas**: Fetch biasanya lebih sederhana dan lebih mudah dipahami, khususnya untuk pengembang yang sudah terbiasa dengan sintaks modern JavaScript.
+* **Fleksibilitas**: Fetch memberikan lebih banyak kontrol atas permintaan HTTP dibandingkan dengan jQuery.
+* **Limited Support**: Tidak semua browser lawas mendukung Fetch API.
 
-Berikut adalah beberapa tips tambahan untuk meningkatkan keamanan cookie:
-* **Gunakan cookie dengan protokol HTTPS**. HTTPS akan mengenkripsi komunikasi antara browser pengguna dan server web.
-* **Setel masa berlaku cookie dengan bijak**. Masa berlaku cookie yang lebih pendek akan mengurangi risiko cookie yang dicuri.
-* **Gunakan cookie dengan domain yang tepat**. Hanya izinkan cookie dari domain yang Anda percayai untuk mengakses data dalam cookie.
+**jQuery AJAX:**
+* **Cross-Browser Compatibility**: jQuery secara otomatis menangani kompatibilitas antar-browser, yang bisa sangat berguna jika Anda membutuhkan dukungan untuk browser lawas.
+* **Rich Feature Set**: jQuery menyediakan banyak fungsi lain selain AJAX yang dapat mempercepat pengembangan.
+* **Community and Plugins**: Karena sudah ada lebih lama, jQuery memiliki komunitas yang lebih besar dan lebih banyak plugin.
+* **Overhead**: Jika Anda hanya membutuhkan AJAX, memasukkan seluruh pustaka jQuery bisa dianggap berlebihan.
+* **Callback-Based**: Dibandingkan dengan Promises, penggunaan callback bisa membuat kode lebih sulit untuk dikelola dalam kasus tertentu.
 
-Dengan mengikuti langkah-langkah tersebut, dapat membantu kita untuk mengurangi risiko keamanan saat menggunakan cookies dalam pengembangan web.
+Menurut saya, tidak ada pendapat yang objektif mengenai "yang mana yang lebih baik", karena hal tersebut sangat tergantung pada kebutuhan proyek. Jika kita membangun sebuah aplikasi modern dan tidak memerlukan dukungan untuk browser lawas, Fetch API mungkin lebih sesuai karena sintaksnya yang lebih modern dan karena ia tidak memerlukan pustaka tambahan. Sebaliknya, jika kita memerlukan kompatibilitas lintas browser atau ingin memanfaatkan fitur-fitur jQuery lainnya, maka jQuery AJAX mungkin lebih sesuai.
+
+Oleh karena itu, penting bagi kita untuk mempertimbangkan kebutuhan dan batasan proyek sebelum memilih antara Fetch API dan jQuery AJAX.
 <br>
 <br>

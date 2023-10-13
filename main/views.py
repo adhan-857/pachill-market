@@ -1,9 +1,12 @@
 import datetime
+import json
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseRedirect, HttpResponseNotFound
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.core import serializers
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -146,3 +149,41 @@ def show_xml_by_id(request, id):
 def show_json_by_id(request, id):
     data = Product.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def get_product_json(request):
+    product_item = Product.objects.all()
+    return HttpResponse(serializers.serialize('json', product_item))
+
+@csrf_exempt
+def add_product_ajax(request):
+    if request.method == 'POST':
+        name_1 = request.POST.get("name_1")
+        price = request.POST.get("price")
+        amount = request.POST.get("amount")
+        description = request.POST.get("description")
+        user = request.user
+
+        new_product = Product(name_1=name_1, price=price, amount=amount, description=description, user=user)
+        new_product.save()
+
+        jumlah_total = sum(product.amount for product in Product.objects.filter(user=request.user))
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
+
+@csrf_exempt
+def delete_product_ajax(request):
+    if request.method == 'DELETE':
+        product_id = request.GET.get('id')  # get id from the query parameter
+        try:
+            product = Product.objects.get(id=product_id, user=request.user)
+            product.delete()
+            jumlah_total = sum(product.amount for product in Product.objects.filter(user=request.user))
+            return JsonResponse({'status': 'success', 'message': 'Produk berhasil dihapus'}, status=200)
+        except Product.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Produk tidak ditemukan'}, status=404)
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+    else:
+        return HttpResponseNotAllowed(['DELETE'])
