@@ -209,4 +209,8 @@ Menurut saya, tidak ada pendapat yang objektif mengenai "yang mana yang lebih ba
 
 Oleh karena itu, penting bagi kita untuk mempertimbangkan kebutuhan dan batasan proyek sebelum memilih antara Fetch API dan jQuery AJAX.
 <br>
+<<<<<<< HEAD
 <br>
+=======
+<br>
+>>>>>>> f4bac413d1a7936f0ea6ec83db0cf78ab21a61be
