@@ -78,6 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pachill_market.wsgi.application'
 
+CSRF_TRUSTED_ORIGINS = ['https://ramadhan-andika-tugas.pbp.cs.ui.ac.id']
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
