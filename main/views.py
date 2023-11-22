@@ -14,6 +14,8 @@ from django.contrib import messages
 from main.forms import ProductForm
 from .models import Product
 
+# Deploy ulang
+
 @login_required(login_url='/login')
 # Create your views here.
 def show_main(request):
