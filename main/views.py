@@ -1,8 +1,7 @@
 import datetime
 import json
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, HttpResponseRedirect, HttpResponseNotFound
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, HttpResponseNotAllowed
 from django.http import JsonResponse
 from django.core import serializers
 from django.urls import reverse
@@ -191,3 +190,22 @@ def delete_product_ajax(request):
             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
     else:
         return HttpResponseNotAllowed(['DELETE'])
+    
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+        
+        data = json.loads(request.body)
+
+        new_product = Product.objects.create(
+            user = request.user,
+            name = data["name"],
+            price = int(data["price"]),
+            description = data["description"]
+        )
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
