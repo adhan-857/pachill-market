@@ -194,20 +194,22 @@ def delete_product_ajax(request):
 @csrf_exempt
 def create_product_flutter(request):
     if request.method == 'POST':
-        
-        data = json.loads(request.body)
+        try:
+            data = json.loads(request.body)
+            # Tambahkan validasi data di sini jika perlu
 
-        new_product = Product.objects.create(
-            user = request.user,
-            name1 = data["name1"],
-            name2 = data["name2"],
-            price = int(data["price"]),
-            amount = int(data["amount"]),
-            description = data["description"]
-        )
+            new_product = Product.objects.create(
+                user = request.user,
+                name1 = data.get("name1"), # Pastikan ini sesuai dengan field di model
+                price = data.get("price"),
+                amount = data.get("amount"),
+                description = data.get("description")
+            )
+            new_product.save()
 
-        new_product.save()
-
-        return JsonResponse({"status": "success"}, status=200)
+            return JsonResponse({"status": "success"}, status=200)
+        except Exception as e:
+            # Tangkap kesalahan dan kirimkan sebagai respons
+            return JsonResponse({"status": "error", "message": str(e)}, status=400)
     else:
-        return JsonResponse({"status": "error"}, status=401)
+        return JsonResponse({"status": "error", "message": "Invalid request"}, status=401)
