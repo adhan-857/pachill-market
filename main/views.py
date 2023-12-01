@@ -199,8 +199,10 @@ def create_product_flutter(request):
 
         new_product = Product.objects.create(
             user = request.user,
-            name = data["name"],
+            name1 = data["name1"],
+            name2 = data["name2"],
             price = int(data["price"]),
+            amount = int(data["amount"]),
             description = data["description"]
         )
 
