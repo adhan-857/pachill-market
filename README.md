@@ -1,7 +1,7 @@
 # Tugas 2: Implementasi *Model-View-Template* (MVT) pada Django
 ### Ramadhan Andika Putra (2206081976) - PBP A <br>
 
-*[ Link web: [https://pachill-market.adaptable.app/main/](http://ramadhan-andika-tugas.pbp.cs.ui.ac.id/) ]*
+*[ Link web: http://ramadhan-andika-tugas.pbp.cs.ui.ac.id/ ]*
 
 #### Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*!
 >> #### [ Membuat sebuah proyek Django baru ]
